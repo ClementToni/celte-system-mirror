@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EC2 Cost Comparison</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 2rem;
+    }
+    canvas {
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    button {
+      background-color: #1976d2;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1565c0;
+    }
+  </style>
+</head>
+<body>
+  <h2>💰 AWS EC2: 10 Small Instances vs 1 Large Instance</h2>
+  <p id="cost-type-label">Affichage : Coût Horaire</p>
+  <canvas id="costChart"></canvas>
+  <button onclick="toggleCosts()">Afficher Coût Annuel / Horaire</button>
+
+  <script>
+    const hourlyData = [0.928, 1.856];
+    const yearlyData = [8129.25, 16258.50];
+    let showingYearly = false;
+
+    const ctx = document.getElementById('costChart').getContext('2d');
+    const costChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['10 x m7g.xlarge', '1 x m7g.10xlarge'],
+        datasets: [{
+          label: 'Coût ($)',
+          data: hourlyData,
+          backgroundColor: ['#4CAF50', '#F44336'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: value => `$${value.toLocaleString()}`
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: ctx => `$${ctx.raw.toLocaleString()}`
+            }
+          },
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Comparaison de coût pour 40 vCPU / 160 GB RAM'
+          }
+        }
+      }
+    });
+
+    function toggleCosts() {
+      showingYearly = !showingYearly;
+      costChart.data.datasets[0].data = showingYearly ? yearlyData : hourlyData;
+      document.getElementById("cost-type-label").innerText =
+        showingYearly ? "Affichage : Coût Annuel" : "Affichage : Coût Horaire";
+      costChart.update();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+    "welcome": "Bienvenue",
+    "test": "Test personnalisé",
+    "presentation": {
+        "adapted": "Adapté à vos besoins",
+        "adapted-description": "Notre questionnaire analyse vos objectifs et vos besoins pour vous proposer les compléments alimentaires qui vous correspondent.",
+        "quality": "Qualité",
+        "quality-description": "Nous sélectionnons les meilleurs compléments alimentaires pour vous garantir une qualité irréprochable.",
+        "price": "Prix",
+        "price-description": "Nous avons analysé le marché pour vous proposer les meilleurs prix."
+    },
+    "sport": {
+        "hypertrophy": "Hypertrophie",
+        "hypertrophy-description": "La hypertrophie est le processus de construction de masse musculaire. Elle est essentielle pour les athlètes qui souhaitent augmenter leur force et leur performance.",
+        "strength": "Force",
+        "strength-description": "La force est la capacité de produire une force maximale dans un court laps de temps.",
+        "endurance": "Endurance",
+        "endurance-description": "L'endurance est la capacité de maintenir une performance élevée pendant une longue période.",
+        "wellness": "Bien-être",
+        "wellness-description": "Le bien-être est la capacité de maintenir une performance élevée pendant une longue période.",
+        "sleep": "Sommeil",
+        "sleep-description": "Le sommeil est le processus de construction de masse musculaire."
+    },
+    "how-it-works": {
+        "how": "Notre application se base sur les dernières études scientifiques afin de realiser une analyse approfondie de l'offre des compléments alimentaires sur le marché et pouvoir ainsi vous proposer les meilleurs produits.",
+        "adapted": "Adapté à vos objectifs",
+        "title": "Comment ça marche ?",
+        "avoid": "Ce que l'on evite",
+        "avoid-trasability": "Des produits sans transparence ni tracabilité",
+        "avoid-price": "De mauvais rapports qualité/prix",
+        "prefer": "Ce que l'on privilégie",
+        "prefer-quality": "Des produits validés par des études scientifiques",
+        "prefer-specificity": "Des compléments alimentaires spécifiques à vos objectifs"
+    },
+    "complement": {
+        "mineral": "Minéral",
+        "protein": "Protéine",
+        "creatine": "Creatine",
+        "glutamine": "Glutamine",
+        "zinc": "Zinc",
+        "magnesium": "Magnésium",
+        "vitamine": "Vitamine",
+        "vitaminD": "Vitamine D",
+        "vitaminB6": "Vitamine B6",
+        "vitaminB12": "Vitamine B12",
+        "vitaminC": "Vitamine C",
+        "vitaminE": "Vitamine E"
+    },
+    "cta": {
+        "title": "Prêt à transformer votre entraînement ?",
+        "description": "Découvrez les compléments alimentaires qui vous correspondent en quelques minutes. C'est rapide, simple et adapté à vos objectifs.",
+        "button": "Commencez votre test gratuit",
+        "time": "⏱️ En seulement 2 minutes"
+    }
+}
