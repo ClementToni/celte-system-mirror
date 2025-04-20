@@ -1,26 +1,22 @@
-name: Mirror Repository
+# .github/workflows/mirror.yml
+name: Mirror to Personal Repo
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-
-
-      - name: Push to mirror
-        env:
-          SOURCE_REPO: "https://github.com/celte-team/celte-landing-page.git"
-          MIRROR_REPO: ${{ secrets.MIRROR_REPO_URL }}
+      - name: Push to Mirror Repo
         run: |
           git remote add mirror ${{ secrets.MIRROR_REPO_URL }}
-          git push --mirror --force mirror
+          git push --mirror mirror
+        env:
+          GIT_AUTHOR_NAME: github-actions
+          GIT_AUTHOR_EMAIL: github-actions@github.com
