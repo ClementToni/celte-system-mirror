@@ -24,6 +24,21 @@ jobs:
           # Configure Git to use HTTPS with credentials
           git config --global url."https://$MIRROR_PAT@github.com/".insteadOf "git@github.com:"
 
+      - name: Check Repository Access
+        env:
+          MIRROR_PAT: ${{ secrets.MIRROR_PAT }}
+        run: |
+          echo "Checking PAT validity..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token $MIRROR_PAT" https://api.github.com/user)
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "✓ PAT is valid"
+            echo "Checking repository access..."
+            curl -s -H "Authorization: token $MIRROR_PAT" https://api.github.com/repos/ClementToni/celte-system-mirror
+          else
+            echo "✗ PAT is invalid or has insufficient permissions"
+            exit 1
+          fi
+
       - name: Push to Mirror Repo
         env:
           MIRROR_PAT: ${{ secrets.MIRROR_PAT }}
