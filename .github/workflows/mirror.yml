@@ -11,8 +11,10 @@ jobs:
 
     steps:
       - name: Mirror push to personal repo
+        env:
+          TOKEN: ${{ secrets.MIRROR_PAT }}
         run: |
-          git clone --mirror https://github.com/celte-team/celte-landing-page.git repo.git
+          git clone --mirror https://oauth2:${TOKEN}@github.com/celte-team/celte-landing-page.git repo.git
           cd repo.git
-          git remote set-url --push origin https://x-access-token:${{ secrets.MIRROR_PAT }}@github.com/ClementToni/celte-system-mirror.git
+          git remote set-url --push origin https://oauth2:${TOKEN}@github.com/ClementToni/celte-system-mirror.git
           git push --mirror
