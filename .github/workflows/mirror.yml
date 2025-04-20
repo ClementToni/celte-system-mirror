@@ -15,14 +15,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push to Mirror Repo
+      - name: Configure Git
+        env:
+          MIRROR_PAT: ${{ secrets.MIRROR_PAT }}
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Configure Git to use HTTPS with credentials
+          git config --global url."https://$MIRROR_PAT@github.com/".insteadOf "git@github.com:"
 
-          # Construct the URL with the PAT for authentication
-          MIRROR_URL="https://${{ secrets.MIRROR_PAT }}@github.com/ClementToni/celte-system-mirror.git"
-
-          # Add the remote and push
+      - name: Push to Mirror Repo
+        env:
+          MIRROR_PAT: ${{ secrets.MIRROR_PAT }}
+        run: |
+          # Use HTTPS URL format
+          MIRROR_URL="https://$MIRROR_PAT@github.com/ClementToni/celte-system-mirror.git"
+          echo "Adding mirror remote..."
           git remote add mirror "$MIRROR_URL"
+          echo "Pushing to mirror..."
           git push --mirror mirror
