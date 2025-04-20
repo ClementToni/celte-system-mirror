@@ -1,4 +1,3 @@
-# .github/workflows/mirror.yml
 name: Mirror to Personal Repo
 
 on:
@@ -21,7 +20,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Configure Git to use HTTPS with credentials
           git config --global url."https://$MIRROR_PAT@github.com/".insteadOf "git@github.com:"
 
       - name: Check Repository Access
@@ -43,7 +41,6 @@ jobs:
         env:
           MIRROR_PAT: ${{ secrets.MIRROR_PAT }}
         run: |
-          # Use HTTPS URL format
           MIRROR_URL="https://$MIRROR_PAT@github.com/ClementToni/celte-system-mirror.git"
           echo "Adding mirror remote..."
           git remote add mirror "$MIRROR_URL"
