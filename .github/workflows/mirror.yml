@@ -14,11 +14,35 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
 
       - name: Push to mirror
         env:
-          SOURCE_REPO: "https://github.com/celte-team/celte-landing-page.git"
-          MIRROR_REPO: ${{ secrets.MIRROR_REPO_URL }}
+          MIRROR_REPO_URL: ${{ secrets.MIRROR_REPO_URL }}
+          MIRROR_PAT: ${{ secrets.MIRROR_PAT }}
         run: |
-          git remote add mirror ${{ secrets.MIRROR_REPO_URL }}
+          if [ -z "$MIRROR_REPO_URL" ]; then
+            echo "Error: MIRROR_REPO_URL is not set"
+            exit 1
+          fi
+
+          if [ -z "$MIRROR_PAT" ]; then
+            echo "Error: MIRROR_PAT is not set"
+            exit 1
+          fi
+
+          echo "Setting up mirror repository..."
+          MIRROR_REPO_WITH_PAT="https://$MIRROR_PAT@${MIRROR_REPO_URL#https://}"
+
+          echo "Adding mirror remote..."
+          git remote add mirror "$MIRROR_REPO_WITH_PAT"
+
+          echo "Pushing to mirror..."
           git push --mirror --force mirror
+
+          echo "Mirror completed successfully!"
