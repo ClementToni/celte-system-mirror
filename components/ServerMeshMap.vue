@@ -16,7 +16,6 @@
                 :src="path"
                 alt="Map chunk"
                 class="w-full h-full object-cover"
-                :class="getImagePositionClass(i)"
               />
             </div>
           </div>
@@ -75,10 +74,10 @@
   const text3 = ref(null)
 
   const mapsPath = {
-    0: '/brc-left-top.jpg',
-    1: '/brc-right-top.jpg',
-    2: '/brc-left-bottom.jpg',
-    3: '/brc-left-bottom.jpg',
+    0: '/maps/map-left-up.svg',
+    1: '/maps/map-right-up.svg',
+    2: '/maps/map-left-down.svg',
+    3: '/maps/map-right-down.svg',
   }
 
   // Réduire les valeurs de déplacement

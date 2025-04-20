@@ -1,0 +1,24 @@
+name: Mirror Repository
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Push to mirror
+        env:
+          SOURCE_REPO: "https://github.com/celte-team/celte-landing-page.git"
+          MIRROR_REPO: ${{ secrets.MIRROR_REPO_URL }}
+        run: |
+          git remote add mirror ${{ secrets.MIRROR_REPO_URL }}
+          git push --mirror --force mirror

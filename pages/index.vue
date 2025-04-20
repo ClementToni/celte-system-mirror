@@ -4,16 +4,15 @@
     <header class="header">
       <div class="container">
         <div class="header-content">
-          <img src="/public/celte-logo.webp" alt="Celte" class="w-10 h-10" />
-            <h1 class="text-5xl ml-20">Celte</h1>
-          <nav class="nav-menu">
-            <a href="#" class="nav-link active">Home</a>
-            <a href="https://zcal.co/clement-toni/30min" class="nav-link">Call Us</a>
-          <!-- </nav>
-          <nav class="nav-menu"> -->
-            <!-- <a href="https://celte-team.github.io" class="nav-link">Documentation</a> -->
-            <a href="https://celte-team.github.io" class="nav-link" target="_blank">Documentation</a>
-          </nav>
+          <div class="flex items-center justify-between w-full">
+            <img src="/public/celte-logo.webp" alt="Celte" class="w-10 h-10" />
+            <h1 class="text-5xl absolute left-1/2 transform -translate-x-1/2">Celte</h1>
+            <nav class="nav-menu">
+              <!-- <a href="#" class="nav-link active">Home</a> -->
+              <a href="https://zcal.co/clement-toni/30min" class="nav-link" target="_blank">Call Us</a>
+              <a href="https://celte-team.github.io" class="nav-link" target="_blank">Documentation</a>
+            </nav>
+          </div>
         </div>
       </div>
     </header>
@@ -33,7 +32,8 @@
       </div> -->
     </section>
     <ServerMeshMap id="demo-map" />
-
+    <!-- <AwsPriceComparison /> -->
+    <CostComparison />
     <!-- Features Section -->
     <section class="features" id="learn-more">
       <div class="container">
@@ -54,8 +54,8 @@
              a lot of player mean a lot of servers when there is less player, the servers will be merged into fewer zones.
             -->
             <h3>Reduce server cost</h3>
-            <p>
-              With Celte, you only use the servers you need, cutting unnecessary costs. By dynamically scaling infrastructure based on real-time demand.
+            <p class="text-lg leading-relaxed text-justify">
+              With Celte, you only use the servers you need, cutting unnecessary costs. <br> By dynamically scaling infrastructure based on real-time demand.
               <!-- Celte's server meshing technology optimizes resource allocation, ensuring you only use the servers you need, cutting unnecessary costs. By dynamically scaling infrastructure based on real-time demand, studios can reduce expenses while maintaining high performance. -->
               <!-- Celte's server meshing technology optimizes resource allocation by distributing the game world across different nodes instead of relying on a single dedicated server. This means more players, larger worlds, and seamless scalability without performance bottlenecks. -->
             </p>
@@ -66,15 +66,31 @@
                 <path d="M22 12H18L15 21L9 3L6 12H2" />
               </svg>
             </div>
-            <h3>Dynamically scale up and down your servers</h3>
-            <p>
-              We are able to dynamically split your map into multiple smaller zones, and distribute them across multiple servers.
-              <br>
-              a lot of player mean a lot of servers when there is less player, the servers will be merged into fewer zones.
+            <h3>Transform Your Infrastructure into a Scalable, Dynamic System</h3>
+            <p class="text-lg leading-relaxed text-justify">
+              <!-- Our technology automatically divides your map into smaller, manageable zones and intelligently distributes them across multiple servers. -->
+              <!-- <br> -->
+              As player activity increases, more servers are deployed to handle the load. When activity drops, zones are efficiently merged, reducing the number of active servers.
             </p>
           </div>
 
-        <AwsComparison />
+          <div class="feature-card">
+            <div class="feature-icon flex justify-center items-center">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3h18v18H3z"/>
+                <path d="M3 9h18"/>
+                <path d="M3 15h18"/>
+                <path d="M9 3v18"/>
+                <path d="M15 3v18"/>
+              </svg>
+            </div>
+            <h3>Unlimited Map Size</h3>
+            <p class="text-lg leading-relaxed text-justify">
+              Break map size limits with Celte's server meshing. Build seamless, dynamic worlds without boundaries or loading screens—just endless possibilities.
+            </p>
+          </div>
+
+        <!-- <AwsComparison /> -->
 
           <!-- <div class="feature-card">
             <div class="feature-icon flex justify-center items-center">
@@ -97,17 +113,17 @@
     <!-- Solution Section -->
     <section class="solution">
       <div class="">
-        <h2 class="text-center text-4xl mb-10">Our Solution</h2>
+        <h2 class="text-center text-4xl mb-14">Our Solution</h2>
         <div class="grid grid-cols-2 gap-32 max-w-6xl mx-auto px-8 mt-12">
           <div>
             <h3 class="text-3xl mb-4">What is Server Meshing?</h3>
-            <p class="text-lg leading-relaxed">
+            <p class="text-lg leading-relaxed text-justify">
               Server meshing is a revolutionary technology that allows multiple servers to work together dynamically, distributing the game world across different nodes instead of relying on a single dedicated server. This means more players, larger worlds, and seamless scalability without performance bottlenecks.
             </p>
           </div>
           <div>
             <h3 class="text-3xl mb-4">Why is it game changer?</h3>
-            <p class="text-lg leading-relaxed">
+            <p class="text-lg leading-relaxed text-justify">
               Traditional servers struggle with high player counts and complex environments, leading to lag, crashes, and high costs. With Celte's server meshing, studios can scale efficiently, reduce server expenses, and deliver a fluid, uninterrupted gaming experience—ensuring players stay immersed, no matter how big the game gets.
             </p>
           </div>
@@ -125,13 +141,13 @@
             <h2>Celte</h2>
             <p>celte-info@gmail.com</p>
             <div class="social-links">
-              <a href="#" class="social-link">
+              <a href="https://discord.gg/4TsPmxuv" class="social-link">
                 <img src="/images/discord-icon.png" alt="Discord" />
               </a>
-              <a href="#" class="social-link">
+              <a href="https://github.com/celte-team" class="social-link">
                 <img src="/images/github-icon.png" alt="GitHub" />
               </a>
-              <a href="#" class="social-link">
+              <a href="https://celte-team.github.io/" class="social-link">
                 <img src="/images/link-icon.png" alt="Link" />
               </a>
             </div>
@@ -146,7 +162,7 @@
               <div class="form-group">
                 <label class="checkbox-label">
                   <input type="checkbox" />
-                  <span>Yes, Subscribe me to newsletter</span>
+                  <span class=" leading-relaxed text-justify ml-1">Yes, Subscribe me to newsletter</span>
                 </label>
               </div>
               <button type="submit" class="btn-primary">Submit</button>
@@ -322,26 +338,45 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
+  align-items: stretch;
 }
 
 .feature-card {
   text-align: center;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
 .feature-icon {
-  margin-bottom: 20px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
   color: var(--text-color);
 }
 
 .feature-card h3 {
   font-size: 18.75px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .feature-card p {
   font-size: 15px;
   line-height: 1.92;
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
 }
 
 /* Solution Section Styles */
