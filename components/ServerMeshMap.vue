@@ -20,40 +20,43 @@
             </div>
           </div>
 
-          <!-- Text Sections -->
-          <div class="w-[400px] text-white relative h-[600px]">
-            <!-- Initial Text -->
-            <div ref="text1" class="absolute inset-0 opacity-0 ml-12">
-              <h2 class="text-3xl font-bold mb-6 text-cyan-400">Server Meshing Technology</h2>
-              <p class="text-lg leading-relaxed mb-4">
-                Traditionally, online games use a single server to manage an entire area.
-              </p>
-              <p class="text-lg leading-relaxed">
-                This approach limits the game's capacity and performance.
-              </p>
+          <!-- Right Column: Text + Progress Bar -->
+          <div class="w-[400px] flex flex-col">
+            <!-- Text Sections -->
+            <div class="text-white relative h-[600px]">
+              <!-- Initial Text -->
+              <div ref="text1" class="absolute inset-0 opacity-0">
+                <h2 class="text-3xl font-bold mb-6 text-cyan-400">Server Meshing Technology</h2>
+                <p class="text-lg leading-relaxed mb-4">
+                  Traditionally, online games use a single server to manage an entire area.
+                </p>
+                <p class="text-lg leading-relaxed">
+                  This approach limits the game's capacity and performance.
+                </p>
+              </div>
+
+              <!-- Middle Text -->
+              <div ref="text2" class="absolute inset-0 opacity-0">
+                <h2 class="text-3xl font-bold mb-6 text-cyan-400">Dynamic Division</h2>
+                <p class="text-lg leading-relaxed mb-4">
+                  With server meshing, the map is divided into distinct, dynamically-managed zones.
+                </p>
+                <p class="text-lg leading-relaxed mb-4">
+                  Each zone is handled by a dedicated server, improving performance by distributing the load efficiently.
+                </p>
+                <p class="text-lg leading-relaxed">
+                  A replication layer connects all servers in real-time, keeping the entire world seamlessly synchronized.
+                </p>
+              </div>
+
             </div>
 
-            <!-- Middle Text -->
-            <div ref="text2" class="absolute inset-0 opacity-0 ml-12">
-              <h2 class="text-3xl font-bold mb-6 text-cyan-400">Dynamic Division</h2>
-              <p class="text-lg leading-relaxed mb-4">
-                With server meshing, the map is divided into distinct zones.
-              </p>
-              <p class="text-lg leading-relaxed">
-                Each zone is managed by a dedicated server, allowing better load distribution.
-              </p>
+            <!-- Horizontal Progress Bar -->
+            <div ref="progressBarContainer" class="w-full -mt-64">
+                <div class="h-1.5 w-full rounded-full bg-gray-800">
+                    <div ref="progressBar" class="h-1.5 rounded-full bg-cyan-400" style="width: 0%"></div>
+                </div>
             </div>
-
-            <!-- Final Text -->
-            <!-- <div ref="text3" class="absolute inset-0 opacity-0">
-              <h2 class="text-3xl font-bold mb-6 text-cyan-400">Benefits</h2>
-              <ul class="text-lg leading-relaxed list-disc list-inside space-y-2">
-                <li>Enhanced performance</li>
-                <li>Increased player capacity</li>
-                <li>Better stability</li>
-                <li>Optimized costs</li>
-              </ul>
-            </div> -->
           </div>
         </div>
       </div>
@@ -71,7 +74,8 @@
   const zoneRefs = ref([])
   const text1 = ref(null)
   const text2 = ref(null)
-  const text3 = ref(null)
+  const progressBar = ref(null)
+  const progressBarContainer = ref(null)
 
   const mapsPath = {
     0: '/maps/map-left-up.svg',
@@ -176,20 +180,30 @@
       }
     })
 
-    // Troisième texte
-    gsap.fromTo(text3.value,
-      { opacity: 0, x: -100 },
-      {
-        opacity: 1,
-        x: 0,
-        scrollTrigger: {
-          trigger: container.value,
-          start: "66% top",
-          end: "73% top",
-          scrub: 1,
-        }
+    // Animation de la barre de progression
+    gsap.to(progressBar.value, {
+      width: '100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: container.value,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
       }
-    )
+    })
+
+    // Disparition de la barre de progression
+    gsap.to(progressBarContainer.value, {
+      opacity: 0,
+      filter: 'blur(8px)',
+      ease: 'power1.inOut',
+      scrollTrigger: {
+        trigger: container.value,
+        start: '73% top',
+        end: '85% top',
+        scrub: true,
+      },
+    })
   })
   </script>
 
