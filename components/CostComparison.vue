@@ -67,7 +67,7 @@ const chartOption = {
       const dsmCost = params[1].data.toFixed(2);
       return `
         <div class="font-semibold">${month}</div>
-        <div>VM Cost: €${vmCost}</div>
+        <div>Server Cost: €${vmCost}</div>
         <div>Dynamic Server Meshing: €${dsmCost}</div>
       `;
     }
