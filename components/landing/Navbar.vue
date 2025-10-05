@@ -28,13 +28,7 @@ const { locale } = useI18n();
       <!-- Logo centré -->
       <div class="absolute left-1/2 transform -translate-x-1/2">
         <a href="/" class="flex items-center">
-          <span class="text-3xl font-extrabold text-primary-600">
-            Complement
-          </span>
-          <span class="text-3xl font-extrabold text-primary-600">-</span>
-          <span class="text-3xl font-extrabold text-primary-600">
-            Fit
-          </span>
+          <img src="/celte-logo.webp" alt="Celte logo" class="h-10" />
         </a>
       </div>
 

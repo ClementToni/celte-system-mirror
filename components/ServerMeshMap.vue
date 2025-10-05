@@ -1,22 +1,22 @@
 <template>
-    <section ref="container" class="relative h-[250vh] bg-[#0A1929]">
+    <section ref="container" class="relative h-[450vh] bg-[#0A1929]">
       <div class="sticky top-0 h-screen w-full flex items-center justify-center">
-        <div class="flex items-center gap-12 max-w-[1200px] mx-auto">
-          <!-- Map Container -->
-          <div class="relative w-[600px] h-[600px]">
-            <!-- Chunks of the map -->
-            <div
-              v-for="(path, i) in mapsPath"
-              :key="i"
-              :ref="el => zoneRefs[i] = el"
-              class="absolute w-[50%] h-[50%] overflow-hidden transition-transform duration-1000"
-              :class="getPositionClass(i)"
-            >
-              <img
-                :src="path"
-                alt="Map chunk"
-                class="w-full h-full object-cover"
-              />
+        <!-- Container for first two videos (side by side layout) -->
+        <div ref="sideBySideContainer" class="flex items-center gap-12 max-w-[1200px] mx-auto opacity-100">
+          <!-- Left Column: Video Container -->
+          <div class="relative w-[600px] h-[600px] flex-shrink-0">
+            <!-- First video - Server Sharding -->
+            <div ref="video1" class="absolute inset-0 opacity-0 rounded-2xl overflow-hidden">
+              <video src="../public/videos/server-sharding.mov" class="w-full h-full object-contain" autoplay muted loop>
+                <source src="../public/videos/server-sharding.mov" type="video/mov">
+              </video>
+            </div>
+
+            <!-- Second video - Server Partitioning -->
+            <div ref="video2" class="absolute inset-0 opacity-0 rounded-2xl overflow-hidden">
+              <video src="../public/videos/server-partitioning.mov" class="w-full h-full object-contain" autoplay muted loop>
+                <source src="../public/videos/server-partitioning.mov" type="video/mov">
+              </video>
             </div>
           </div>
 
@@ -39,16 +39,15 @@
               <div ref="text2" class="absolute inset-0 opacity-0">
                 <h2 class="text-3xl font-bold mb-6 text-cyan-400">Dynamic Division</h2>
                 <p class="text-lg leading-relaxed mb-4">
-                  With server meshing, the map is divided into distinct, dynamically-managed zones.
+                  Current solution forces you to create multiple servers for each zone, and manage them manually.
                 </p>
-                <p class="text-lg leading-relaxed mb-4">
+                <!-- <p class="text-lg leading-relaxed mb-4">
                   Each zone is handled by a dedicated server, improving performance by distributing the load efficiently.
                 </p>
                 <p class="text-lg leading-relaxed">
                   A replication layer connects all servers in real-time, keeping the entire world seamlessly synchronized.
-                </p>
+                </p> -->
               </div>
-
             </div>
 
             <!-- Horizontal Progress Bar -->
@@ -56,6 +55,43 @@
                 <div class="h-1.5 w-full rounded-full bg-gray-800">
                     <div ref="progressBar" class="h-1.5 rounded-full bg-cyan-400" style="width: 0%"></div>
                 </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Container for third video (side-by-side layout with larger video) -->
+        <div ref="centeredContainer" class="absolute inset-0 flex items-center justify-center gap-12 max-w-[1400px] mx-auto opacity-0 px-8">
+          <!-- Left: Third video - Dynamic Server Meshing (Larger) -->
+          <div class="relative w-[800px] h-[700px] flex-shrink-0">
+            <div ref="video3" class="w-full h-full opacity-0 rounded-2xl overflow-hidden">
+              <video src="../public/videos/dynamic-server-meshing.mp4" class="w-full h-full object-contain" autoplay muted loop>
+                <source src="../public/videos/dynamic-server-meshing.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <!-- Right: Third Text - The Celte Advantage -->
+          <div ref="text3" class="text-white w-[500px] flex flex-col opacity-0">
+            <h2 class="text-4xl font-bold mb-6 text-cyan-400">The Celte Advantage</h2>
+            <p class="text-xl leading-relaxed mb-6">
+              Our proprietary server meshing automatically scales infrastructure in real-time based on player density and activity.
+            </p>
+            <p class="text-xl leading-relaxed mb-8">
+              <strong class="text-white text-2xl">Result:</strong> 10,000+ concurrent players in a single, seamless world with 40% lower costs than traditional architecture.
+            </p>
+            <div class="space-y-4 text-lg">
+              <div ref="checkmark1" class="flex items-center gap-3 opacity-0">
+                <span class="text-2xl text-cyan-400">✓</span>
+                <span>Zero loading time between zones</span>
+              </div>
+              <div ref="checkmark2" class="flex items-center gap-3 opacity-0">
+                <span class="text-2xl text-cyan-400">✓</span>
+                <span>Automatic load balancing</span>
+              </div>
+              <div ref="checkmark3" class="flex items-center gap-3 opacity-0">
+                <span class="text-2xl text-cyan-400">✓</span>
+                <span>Pay only for active servers</span>
+              </div>
             </div>
           </div>
         </div>
@@ -74,8 +110,17 @@
   const zoneRefs = ref([])
   const text1 = ref(null)
   const text2 = ref(null)
+  const text3 = ref(null)
   const progressBar = ref(null)
   const progressBarContainer = ref(null)
+  const video1 = ref(null)
+  const video2 = ref(null)
+  const video3 = ref(null)
+  const sideBySideContainer = ref(null)
+  const centeredContainer = ref(null)
+  const checkmark1 = ref(null)
+  const checkmark2 = ref(null)
+  const checkmark3 = ref(null)
 
   const mapsPath = {
     0: '/maps/map-left-up.svg',
@@ -137,7 +182,7 @@
       x: 0,
       scrollTrigger: {
         trigger: container.value,
-        start: "top top",
+        start: "top 80%",
         end: "33% top",
         scrub: 1,
       }
@@ -174,11 +219,157 @@
       x: 100,
       scrollTrigger: {
         trigger: container.value,
-        start: "66% top",
-        end: "73% top",
+        start: "50% top",
+        end: "55% top",
         scrub: 1,
       }
     })
+
+    // Video animations - show one video at a time
+    // First video - Server Sharding (starts earlier)
+    gsap.to(video1.value, {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: container.value,
+        start: "top 80%",
+        end: "25% top",
+        scrub: 1,
+      }
+    })
+
+    gsap.to(video1.value, {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: container.value,
+        start: "25% top",
+        end: "30% top",
+        scrub: 1,
+      }
+    })
+
+    // Second video - Server Partitioning (25% to 50%)
+    gsap.fromTo(video2.value,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: container.value,
+          start: "25% top",
+          end: "30% top",
+          scrub: 1,
+        }
+      }
+    )
+
+    gsap.to(video2.value, {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: container.value,
+        start: "50% top",
+        end: "55% top",
+        scrub: 1,
+      }
+    })
+
+    // Transition: Fade out side-by-side layout
+    gsap.to(sideBySideContainer.value, {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: container.value,
+        start: "50% top",
+        end: "55% top",
+        scrub: 1,
+      }
+    })
+
+    // Transition: Fade in centered layout
+    gsap.fromTo(centeredContainer.value,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: container.value,
+          start: "55% top",
+          end: "60% top",
+          scrub: 1,
+        }
+      }
+    )
+
+    // Third video - Dynamic Server Meshing (60% to 90% - longer duration)
+    gsap.fromTo(video3.value,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: container.value,
+          start: "60% top",
+          end: "65% top",
+          scrub: 1,
+        }
+      }
+    )
+
+    // Third text - The Celte Advantage (appears at the same time as video)
+    gsap.fromTo(text3.value,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: container.value,
+          start: "60% top",
+          end: "65% top",
+          scrub: 1,
+        }
+      }
+    )
+
+    // Checkmarks appear one by one
+    // First checkmark
+    gsap.fromTo(checkmark1.value,
+      { opacity: 0, x: -20 },
+      {
+        opacity: 1,
+        x: 0,
+        scrollTrigger: {
+          trigger: container.value,
+          start: "68% top",
+          end: "71% top",
+          scrub: 1,
+        }
+      }
+    )
+
+    // Second checkmark
+    gsap.fromTo(checkmark2.value,
+      { opacity: 0, x: -20 },
+      {
+        opacity: 1,
+        x: 0,
+        scrollTrigger: {
+          trigger: container.value,
+          start: "71% top",
+          end: "74% top",
+          scrub: 1,
+        }
+      }
+    )
+
+    // Third checkmark
+    gsap.fromTo(checkmark3.value,
+      { opacity: 0, x: -20 },
+      {
+        opacity: 1,
+        x: 0,
+        scrollTrigger: {
+          trigger: container.value,
+          start: "74% top",
+          end: "77% top",
+          scrub: 1,
+        }
+      }
+    )
 
     // Animation de la barre de progression
     gsap.to(progressBar.value, {
@@ -186,7 +377,7 @@
       ease: 'none',
       scrollTrigger: {
         trigger: container.value,
-        start: "top top",
+        start: "top 80%",
         end: "bottom bottom",
         scrub: true,
       }
@@ -199,8 +390,8 @@
       ease: 'power1.inOut',
       scrollTrigger: {
         trigger: container.value,
-        start: '73% top',
-        end: '85% top',
+        start: '50% top',
+        end: '55% top',
         scrub: true,
       },
     })
