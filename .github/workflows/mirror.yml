@@ -14,7 +14,6 @@ jobs:
         env:
           TOKEN: ${{ secrets.MIRROR_PAT }}
         run: |
-          git clone --mirror https://oauth2:${TOKEN}@github.com/celte-team/celte-landing-page.git repo.git
+          git clone --bare https://oauth2:${TOKEN}@github.com/celte-team/celte-landing-page.git repo.git
           cd repo.git
-          git remote set-url --push origin https://oauth2:${TOKEN}@github.com/ClementToni/celte-system-mirror.git
-          git push --prune origin "refs/heads/*:refs/heads/*" "refs/tags/*:refs/tags/*"
+          git push --mirror https://oauth2:${TOKEN}@github.com/ClementToni/celte-system-mirror.git
