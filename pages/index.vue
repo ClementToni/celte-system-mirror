@@ -168,7 +168,7 @@
     <section class="solution">
       <div class="">
         <h2 class="text-center text-4xl mb-14">Our Solution</h2>
-        <div class="grid grid-cols-2 gap-32 max-w-6xl mx-auto px-8 mt-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-32 max-w-6xl mx-auto px-8 mt-12">
           <div>
             <h3 class="text-3xl mb-4">What is Server Meshing?</h3>
             <p class="text-lg leading-relaxed text-justify">
