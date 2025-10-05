@@ -1,35 +1,35 @@
 <template>
-  <section class="problem-section py-20 bg-white">
-    <div class="container max-w-6xl mx-auto px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-5xl font-bold text-[#0047FF] mb-6">
+  <section class="problem-section py-12 sm:py-16 lg:py-20 bg-white">
+    <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 sm:mb-12 lg:mb-16">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0047FF] mb-4 sm:mb-6 px-2">
           "Why can't we have 1000 players in the same world?"
         </h2>
-        <p class="text-2xl text-[#0047FF] opacity-80">
+        <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-[#0047FF] opacity-80 px-2">
           Every game studio faces the same infrastructure nightmare
         </p>
       </div>
 
       <!-- Stats Grid -->
-      <div class="stats-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        <div class="stat-card bg-[#DDE7FE] p-8 rounded-lg text-center">
-          <div class="big-number text-6xl font-bold text-[#0047FF] mb-3">200</div>
-          <p class="text-lg text-[#0047FF]">Average player cap per server in 2024</p>
+      <div class="stats-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-10 sm:mb-12 lg:mb-16">
+        <div class="stat-card bg-[#DDE7FE] p-4 sm:p-6 lg:p-8 rounded-lg text-center">
+          <div class="big-number text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#0047FF] mb-2 sm:mb-3">200</div>
+          <p class="text-sm sm:text-base lg:text-lg text-[#0047FF]">Average player cap per server in 2024</p>
         </div>
 
-        <div class="stat-card bg-[#DDE7FE] p-8 rounded-lg text-center">
-          <div class="big-number text-6xl font-bold text-[#0047FF] mb-3">$40K+</div>
-          <p class="text-lg text-[#0047FF]">Monthly server costs for a mid-size MMO</p>
+        <div class="stat-card bg-[#DDE7FE] p-4 sm:p-6 lg:p-8 rounded-lg text-center">
+          <div class="big-number text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#0047FF] mb-2 sm:mb-3">$40K+</div>
+          <p class="text-sm sm:text-base lg:text-lg text-[#0047FF]">Monthly server costs for a mid-size MMO</p>
         </div>
 
-        <div class="stat-card bg-[#DDE7FE] p-8 rounded-lg text-center">
-          <div class="big-number text-6xl font-bold text-[#0047FF] mb-3">67%</div>
-          <p class="text-lg text-[#0047FF]">Of players quit after experiencing server lag</p>
+        <div class="stat-card bg-[#DDE7FE] p-4 sm:p-6 lg:p-8 rounded-lg text-center">
+          <div class="big-number text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#0047FF] mb-2 sm:mb-3">67%</div>
+          <p class="text-sm sm:text-base lg:text-lg text-[#0047FF]">Of players quit after experiencing server lag</p>
         </div>
 
-        <div class="stat-card bg-[#DDE7FE] p-8 rounded-lg text-center">
-          <div class="big-number text-6xl font-bold text-[#0047FF] mb-3">$180B</div>
-          <p class="text-lg text-[#0047FF]">Global MMO market by 2027</p>
+        <div class="stat-card bg-[#DDE7FE] p-4 sm:p-6 lg:p-8 rounded-lg text-center">
+          <div class="big-number text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#0047FF] mb-2 sm:mb-3">$180B</div>
+          <p class="text-sm sm:text-base lg:text-lg text-[#0047FF]">Global MMO market by 2027</p>
         </div>
       </div>
 

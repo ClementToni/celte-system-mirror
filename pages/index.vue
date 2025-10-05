@@ -319,19 +319,34 @@ body {
   overflow: hidden;
   min-height: 80vh;
   padding-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-background-video {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Ensure video covers on mobile */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 100vh;
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .hero-background-video {
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 
 .hero-overlay {

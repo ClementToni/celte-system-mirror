@@ -17,4 +17,4 @@ jobs:
           git clone --mirror https://oauth2:${TOKEN}@github.com/celte-team/celte-landing-page.git repo.git
           cd repo.git
           git remote set-url --push origin https://oauth2:${TOKEN}@github.com/ClementToni/celte-system-mirror.git
-          git push --mirror
+          git push --prune origin "refs/heads/*:refs/heads/*" "refs/tags/*:refs/tags/*"
