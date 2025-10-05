@@ -34,6 +34,14 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
+      title: 'Celte - Server Meshing for Multiplayer Games',
+      link: [
+        { rel: 'icon', type: 'image/webp', href: '/celte-logo.webp' },
+        { rel: 'apple-touch-icon', href: '/celte-logo.webp' }
+      ],
+      meta: [
+        { name: 'description', content: 'Celte enables 10,000+ concurrent players on unlimited maps with 40% lower server costs through advanced server meshing technology.' }
+      ]
     }
   },
 
