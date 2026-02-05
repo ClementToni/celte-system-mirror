@@ -70,7 +70,7 @@
             Follow our journey as we revolutionize multiplayer gaming infrastructure.
           </p>
           <div class="social-grid space-y-2 sm:space-y-3 mb-4 sm:mb-6">
-            <a href="https://x.com/celte_system" target="_blank" class="social-cta flex items-center justify-between bg-[#DDE7FE] p-2.5 sm:p-3 rounded-lg hover:bg-[#0047FF] hover:text-white transition-all group">
+            <a href="https://x.com/CelteSystem" target="_blank" class="social-cta flex items-center justify-between bg-[#DDE7FE] p-2.5 sm:p-3 rounded-lg hover:bg-[#0047FF] hover:text-white transition-all group">
               <div class="flex items-center gap-2 sm:gap-3">
                 <img src="/images/x-icon.svg" alt="X (Twitter)" class="w-5 h-5 sm:w-6 sm:h-6 text-[#0047FF] group-hover:text-white" />
                 <span class="font-semibold text-[#0047FF] group-hover:text-white text-sm sm:text-base">Follow on X</span>

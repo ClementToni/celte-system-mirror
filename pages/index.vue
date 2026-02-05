@@ -31,10 +31,6 @@
       <div class="hero-overlay"></div>
 
       <div class="text-center max-w-4xl mx-auto px-5 mb-16 relative z-10">
-        <!-- Badge -->
-        <div class="inline-block bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-6">
-          🔥 Now Raising Seed Round
-        </div>
 
         <!-- Main Headline -->
         <h1 class="text-5xl md:text-7xl leading-tight tracking-[-0.042em] text-[#0047FF] font-bold mb-6">
@@ -43,13 +39,14 @@
         </h1>
 
         <!-- Subheadline with metrics -->
-        <p class="text-xl md:text-2xl leading-relaxed text-[#0047FF] opacity-90 mb-8">
+        <!-- <p class="text-xl md:text-2xl leading-relaxed text-[#0047FF] opacity-90 mb-8">
           Celte enables <strong>10,000+ concurrent players</strong> on unlimited maps<br />
           with <strong>40% lower server costs</strong>
         </p>
+        -->
 
         <!-- Impact Metrics -->
-        <div class="flex flex-wrap justify-center gap-8 mb-10">
+        <!-- <div class="flex flex-wrap justify-center gap-8 mb-10">
           <div class="metric">
             <div class="text-4xl font-bold text-[#0047FF]">10,000+</div>
             <div class="text-sm text-[#0047FF] opacity-75">Concurrent Players</div>
@@ -66,17 +63,17 @@
             <div class="text-4xl font-bold text-[#0047FF]">Zero</div>
             <div class="text-sm text-[#0047FF] opacity-75">Loading Screens</div>
           </div>
-        </div>
+        </div> -->
 
         <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+        <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
           <a href="mailto:celte.system@gmail.com?subject=Investor Inquiry" class="inline-block px-8 py-4 bg-[#0047FF] text-white rounded-full text-lg font-bold border-2 border-[#0047FF] transition-all hover:bg-transparent hover:text-[#0047FF] shadow-lg">
             Join Seed Round
           </a>
           <a href="#demo-map" class="inline-block px-8 py-4 bg-transparent text-[#0047FF] rounded-full text-lg font-bold border-2 border-[#0047FF] transition-all hover:bg-[#0047FF] hover:text-white">
             See The Technology
           </a>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -189,7 +186,7 @@
     <VisionSection />
 
     <!-- CTA Hub - Replaces old footer newsletter -->
-    <CtaHub />
+    <!-- <CtaHub /> -->
 
     <!-- Footer -->
     <footer class="footer">
@@ -200,11 +197,11 @@
             <p>celte.system@gmail.com</p>
             <div class="social-links">
               <!--  X -->
-              <a href="https://x.com/celte" class="social-link">
+              <a href="https://x.com/CelteSystem" class="social-link">
                 <img src="/images/x-icon.svg" alt="X (Twitter)" />
               </a>
               <!-- LinkedIn -->
-              <a href="https://www.linkedin.com/company/celte" class="social-link">
+              <a href="https://www.linkedin.com/company/celte-system" class="social-link">
                 <img src="/images/linkedin-icon.svg" alt="LinkedIn" />
               </a>
             </div>

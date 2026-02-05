@@ -3,7 +3,7 @@
     <div v-if="showBar" class="sticky-cta-bar fixed top-0 left-0 right-0 z-50 bg-[#0047FF] shadow-lg">
       <div class="content max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
         <span class="text text-white font-semibold text-lg">
-          Interested in Celte? 🚀
+          Interested in Celte?
         </span>
         <div class="actions flex gap-4">
           <!-- <a
