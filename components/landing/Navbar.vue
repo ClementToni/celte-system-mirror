@@ -28,7 +28,7 @@ const { locale } = useI18n();
       <!-- Logo centré -->
       <div class="absolute left-1/2 transform -translate-x-1/2">
         <a href="/" class="flex items-center">
-          <img src="/celte-logo.webp" alt="Celte logo" class="h-10" />
+          <img src="/celte-logo-white.png" alt="Celte logo" class="h-10 logo-light" />
         </a>
       </div>
 
@@ -42,4 +42,12 @@ const { locale } = useI18n();
 </template>
 
 <style scoped>
+.logo-light {
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+.logo-light:hover {
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(0, 217, 255, 0.6));
+}
 </style>
