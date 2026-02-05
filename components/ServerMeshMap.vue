@@ -77,7 +77,7 @@
               Our proprietary server meshing automatically scales infrastructure in real-time based on player density and activity.
             </p>
             <p class="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 lg:mb-8">
-              <strong class="text-white text-lg sm:text-xl lg:text-2xl">Result:</strong> 10,000+ concurrent players in a single, seamless world with 40% lower costs than traditional architecture.
+              <strong class="text-white text-lg sm:text-xl lg:text-2xl">Result:</strong> 1000+ concurrent players in a single, seamless world with 30% lower costs than traditional architecture.
             </p>
             <div class="space-y-2 sm:space-y-3 lg:space-y-4 text-sm sm:text-base lg:text-lg">
               <div ref="checkmark1" class="flex items-center gap-2 sm:gap-3 opacity-0">

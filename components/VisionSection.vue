@@ -1,20 +1,22 @@
 <template>
-  <section class="vision-section py-12 sm:py-16 lg:py-20 bg-white">
+  <section class="vision-section py-12 sm:py-16 lg:py-20 bg-[#0A0E1A] relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#7B61FF] to-transparent"></div>
     <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-[#0047FF] mb-10 sm:mb-12 lg:mb-16 leading-tight px-2">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white mb-10 sm:mb-12 lg:mb-16 leading-tight px-2">
         We're Building The Infrastructure<br class="hidden sm:block" />For The Next Era Of Gaming
       </h2>
 
       <!-- Market Opportunity -->
-      <div class="market-opportunity bg-[#DDE7FE] p-6 sm:p-8 lg:p-12 rounded-lg mb-10 sm:mb-12 lg:mb-16 text-center">
-        <div class="stat-highlight mb-4 sm:mb-5 lg:mb-6">
-          <span class="big-number text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#0047FF]">$180B</span>
-          <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-[#0047FF] mt-1 sm:mt-2">MMO & multiplayer market by 2027</p>
+      <div class="market-opportunity bg-gradient-to-br from-[#1A1F2E] to-[#0A0E1A] border border-[#00D9FF]/30 p-6 sm:p-8 lg:p-12 rounded-2xl mb-10 sm:mb-12 lg:mb-16 text-center relative overflow-hidden backdrop-blur-xl">
+        <div class="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-[#00D9FF]/5 to-transparent pointer-events-none"></div>
+        <div class="stat-highlight mb-4 sm:mb-5 lg:mb-6 relative z-10">
+          <span class="big-number text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#00D9FF]" style="text-shadow: 0 0 30px rgba(0, 217, 255, 0.5)">$180B</span>
+          <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-[#E5E7EB] mt-1 sm:mt-2">MMO & multiplayer market by 2027</p>
         </div>
-        <p class="market-insight text-sm sm:text-base md:text-lg lg:text-xl text-[#0047FF] leading-relaxed max-w-3xl mx-auto">
+        <p class="market-insight text-sm sm:text-base md:text-lg lg:text-xl text-[#9CA3AF] leading-relaxed max-w-3xl mx-auto relative z-10">
           Every major studio is racing to build "persistent worlds" and "metaverse experiences."
           <br /><br />
-          <strong class="text-base sm:text-lg md:text-xl lg:text-2xl">They all need what we've built.</strong>
+          <strong class="text-base sm:text-lg md:text-xl lg:text-2xl text-[#00D9FF]">We provide the infrastructure to make it happen.</strong>
         </p>
       </div>
 
@@ -82,18 +84,27 @@
 }
 
 .use-case:hover {
-transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 71, 255, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
 }
 
 .milestone.upcoming:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 71, 255, 0.15);
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
 }
 
 .big-number {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
+}
+
+.market-opportunity {
+  transition: all 0.3s ease;
+}
+
+.market-opportunity:hover {
+  border-color: rgba(0, 217, 255, 0.5);
+  box-shadow: 0 0 40px rgba(0, 217, 255, 0.2);
 }
 
 .timeline {

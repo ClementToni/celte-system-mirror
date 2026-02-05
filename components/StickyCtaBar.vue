@@ -1,26 +1,14 @@
 <template>
   <Transition name="slide-down">
-    <div v-if="showBar" class="sticky-cta-bar fixed top-0 left-0 right-0 z-50 bg-[#0047FF] shadow-lg">
+    <div v-if="showBar" class="sticky-cta-bar fixed top-0 left-0 right-0 z-50 bg-[#0A0E1A]/95 backdrop-blur-xl border-b border-[#00D9FF]/20 shadow-[0_4px_20px_rgba(0,217,255,0.15)]">
       <div class="content max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
         <span class="text text-white font-semibold text-lg">
           Interested in Celte?
         </span>
         <div class="actions flex gap-4">
-          <!-- <a
-            href="mailto:celte.system@gmail.com?subject=Investor Inquiry"
-            class="btn-small bg-white text-[#0047FF] px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition-all"
-          >
-            Investor Deck
-          </a>
-          <a
-            href="mailto:celte.system@gmail.com?subject=Beta Program Inquiry"
-            class="btn-small-outline border-2 border-white text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:text-[#0047FF] transition-all"
-          >
-            Join Beta
-          </a> -->
           <a
             href="https://zcal.co/clement-toni/30min"
-            class="btn-small bg-white text-[#0047FF] px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition-all"
+            class="btn-small bg-gradient-to-r from-[#00D9FF] to-[#0084FF] text-[#0A0E1A] px-6 py-2 rounded-full font-bold hover:shadow-[0_0_20px_rgba(0,217,255,0.5)] transition-all"
           >
             Book a demo
           </a>

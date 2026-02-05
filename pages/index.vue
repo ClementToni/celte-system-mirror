@@ -5,7 +5,7 @@
       <div class="container">
         <div class="header-content">
           <div class="flex items-center justify-between w-full">
-            <img src="/public/celte-logo.webp" alt="Celte" class="w-10 h-10" />
+            <img src="/public/celte-logo-white.png" alt="Celte" class="w-10 h-10" />
             <h1 class="text-5xl absolute left-1/2 transform -translate-x-1/2">Celte</h1>
             <nav class="nav-menu">
               <!-- <a href="#" class="nav-link active">Home</a> -->
@@ -33,9 +33,9 @@
       <div class="text-center max-w-4xl mx-auto px-5 mb-16 relative z-10">
 
         <!-- Main Headline -->
-        <h1 class="text-5xl md:text-7xl leading-tight tracking-[-0.042em] text-[#0047FF] font-bold mb-6">
+        <h1 class="text-5xl md:text-7xl leading-tight tracking-[-0.042em] text-white font-bold mb-6">
           Multiplayer games are limited to 200 players per server.<br />
-          <span class="text-[#0033CC]">What if they weren't?</span>
+          <span class="text-[#00D9FF]">What if they weren't?</span>
         </h1>
 
         <!-- Subheadline with metrics -->
@@ -164,17 +164,17 @@
     <!-- Solution Section -->
     <section class="solution">
       <div class="">
-        <h2 class="text-center text-4xl mb-14">Our Solution</h2>
+        <h2 class="text-center text-4xl mb-14 text-white font-bold">Our Solution</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-32 max-w-6xl mx-auto px-8 mt-12">
-          <div>
-            <h3 class="text-3xl mb-4">What is Server Meshing?</h3>
-            <p class="text-lg leading-relaxed text-justify">
+          <div class="solution-card bg-[#1A1F2E]/60 backdrop-blur-lg border border-[#00D9FF]/20 p-8 rounded-xl">
+            <h3 class="text-3xl mb-4 text-[#00D9FF] font-bold">What is Server Meshing?</h3>
+            <p class="text-lg leading-relaxed text-justify text-[#9CA3AF]">
               Server meshing is a revolutionary technology that allows multiple servers to work together dynamically, distributing the game world across different nodes instead of relying on a single dedicated server. This means more players, larger worlds, and seamless scalability without performance bottlenecks.
             </p>
           </div>
-          <div>
-            <h3 class="text-3xl mb-4">Why is it game changer?</h3>
-            <p class="text-lg leading-relaxed text-justify">
+          <div class="solution-card bg-[#1A1F2E]/60 backdrop-blur-lg border border-[#00D9FF]/20 p-8 rounded-xl">
+            <h3 class="text-3xl mb-4 text-[#00D9FF] font-bold">Why is it game changer?</h3>
+            <p class="text-lg leading-relaxed text-justify text-[#9CA3AF]">
               Traditional servers struggle with high player counts and complex environments, leading to lag, crashes, and high costs. With Celte's server meshing, studios can scale efficiently, reduce server expenses, and deliver a fluid, uninterrupted gaming experience—ensuring players stay immersed, no matter how big the game gets.
             </p>
           </div>
@@ -192,42 +192,26 @@
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
-          <div class="footer-brand">
-            <h2>Celte</h2>
-            <p>celte.system@gmail.com</p>
+          <div class="footer-left">
+            <span class="footer-brand">Celte</span>
+            <span class="footer-separator">•</span>
+            <a href="mailto:celte.system@gmail.com" class="footer-email">celte.system@gmail.com</a>
+          </div>
+
+          <div class="footer-center">
+            <p class="copyright">© 2026 Celte. All rights reserved.</p>
+          </div>
+
+          <div class="footer-right">
             <div class="social-links">
-              <!--  X -->
-              <a href="https://x.com/CelteSystem" class="social-link">
+              <a href="https://x.com/CelteSystem" class="social-link" target="_blank" rel="noopener noreferrer">
                 <img src="/images/x-icon.svg" alt="X (Twitter)" />
               </a>
-              <!-- LinkedIn -->
-              <a href="https://www.linkedin.com/company/celte-system" class="social-link">
+              <a href="https://www.linkedin.com/company/celte-system" class="social-link" target="_blank" rel="noopener noreferrer">
                 <img src="/images/linkedin-icon.svg" alt="LinkedIn" />
               </a>
             </div>
           </div>
-          <div class="footer-newsletter">
-            <h3>Empowering Your Game Experience</h3>
-            <form class="newsletter-form">
-              <div class="form-group">
-                <label for="email">Subscribe</label>
-                <input type="email" id="email" placeholder="Enter your email" />
-              </div>
-              <div class="form-group">
-                <label class="checkbox-label">
-                  <input type="checkbox" />
-                  <span class=" leading-relaxed text-justify ml-1">Yes, Subscribe me to newsletter</span>
-                </label>
-              </div>
-              <button type="submit" class="btn-primary">Submit</button>
-            </form>
-          </div>
-          <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Accessibility Statement</a>
-            <a href="#">Terms & Conditions</a>
-          </div>
-          <p class="copyright">© 2025 by Celte.</p>
         </div>
       </div>
     </footer>
@@ -248,12 +232,27 @@ import StickyCtaBar from '~/components/StickyCtaBar.vue'
 </script>
 
 <style>
-/* Global Styles */
+/* Global Styles - Electric Blue Deep Tech Theme */
 :root {
-  --primary-color: #0047FF;
-  --background-color: #DDE7FE;
-  --text-color: #0047FF;
-  --white: #FFFFFF;
+  /* Dark Matter Backgrounds */
+  --primary-bg: #0A0E1A;
+  --secondary-bg: #1A1F2E;
+  --card-bg: rgba(26, 31, 46, 0.6);
+
+  /* Electric Blue Accents */
+  --accent-primary: #00D9FF;
+  --accent-secondary: #0084FF;
+  --accent-glow: #7B61FF;
+
+  /* Text Colors */
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+
+  /* Glow Effects */
+  --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.3);
+  --glow-cyan-hover: 0 0 30px rgba(0, 217, 255, 0.5);
+  --glow-violet: 0 0 20px rgba(123, 97, 255, 0.3);
 }
 
 * {
@@ -264,8 +263,13 @@ import StickyCtaBar from '~/components/StickyCtaBar.vue'
 
 body {
   font-family: 'Inter', sans-serif;
-  color: var(--text-color);
-  background-color: var(--background-color);
+  color: var(--text-primary);
+  background-color: var(--primary-bg);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(0, 217, 255, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(123, 97, 255, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(0, 132, 255, 0.03) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
 .container {
@@ -276,9 +280,10 @@ body {
 
 /* Header Styles */
 .header {
-  background-color: var(--white);
+  background: rgba(10, 14, 26, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 217, 255, 0.1);
   padding: 20px 0;
-  /* position: fixed; */
   width: 100%;
   top: 0;
   z-index: 1000;
@@ -293,6 +298,7 @@ body {
 .logo h1 {
   font-size: 15px;
   font-weight: 400;
+  color: var(--accent-primary);
 }
 
 .nav-menu {
@@ -301,13 +307,21 @@ body {
 }
 
 .nav-link {
-  color: var(--text-color);
+  color: var(--text-primary);
   text-decoration: none;
   font-size: 15.5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--accent-primary);
+  text-shadow: var(--glow-cyan);
 }
 
 .nav-link.active {
   font-weight: 500;
+  color: var(--accent-primary);
 }
 
 /* Hero Section Styles */
@@ -319,6 +333,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, var(--primary-bg) 0%, #0D1525 50%, var(--secondary-bg) 100%);
 }
 
 .hero-background-video {
@@ -330,6 +345,8 @@ body {
   object-fit: cover;
   object-position: center;
   z-index: 0;
+  opacity: 0.4;
+  filter: brightness(0.6) contrast(1.2);
 }
 
 /* Ensure video covers on mobile */
@@ -352,7 +369,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(221, 231, 254, 0.35);
+  background: radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+              linear-gradient(180deg, rgba(10, 14, 26, 0.3) 0%, rgba(10, 14, 26, 0.8) 100%);
   z-index: 1;
 }
 
@@ -377,15 +395,16 @@ body {
   line-height: 1.16;
   letter-spacing: -0.042em;
   margin-bottom: 20px;
-  color: var(--primary-color);
-  font-weight: 400;
+  color: var(--text-primary);
+  font-weight: 700;
+  text-shadow: var(--glow-cyan);
 }
 
 .hero-text p {
   font-size: 18.6px;
   line-height: 1.5;
   margin-bottom: 30px;
-  color: var(--primary-color);
+  color: var(--text-secondary);
   opacity: 0.9;
 }
 
@@ -405,37 +424,69 @@ body {
 .btn-primary {
   display: inline-block;
   padding: 12px 30px;
-  background-color: var(--primary-color);
-  color: var(--white);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--primary-bg);
   text-decoration: none;
   border-radius: 100px;
   font-size: 15px;
-  border: 1px solid var(--primary-color);
+  border: 2px solid transparent;
   transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: var(--glow-cyan);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
 }
 
 .btn-primary:hover {
-  background-color: transparent;
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan-hover);
 }
 
 /* Features Section Styles */
 .features {
   padding: 80px 0;
-  background-color: rgba(255, 255, 255, 0.8);
+  background: var(--secondary-bg);
+  position: relative;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
 }
 
 .features h2 {
   font-size: 51.4px;
   text-align: center;
   margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
 .section-subtitle {
   font-size: 16.7px;
   text-align: center;
   margin-bottom: 60px;
+  color: var(--text-secondary);
 }
 
 .features-grid {
@@ -452,16 +503,36 @@ body {
   flex-direction: column;
   align-items: center;
   height: 100%;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 217, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-primary);
+  box-shadow: var(--glow-cyan);
+  background: rgba(26, 31, 46, 0.8);
 }
 
 .feature-icon {
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
-  color: var(--text-color);
+  color: var(--accent-primary);
+  background: rgba(0, 217, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  background: rgba(0, 217, 255, 0.2);
+  box-shadow: var(--glow-cyan);
 }
 
 .feature-card h3 {
@@ -472,6 +543,8 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .feature-card p {
@@ -481,17 +554,32 @@ body {
   display: flex;
   align-items: flex-start;
   margin: 0;
+  color: var(--text-secondary);
 }
 
 /* Solution Section Styles */
 .solution {
   padding: 80px 0;
+  background: var(--primary-bg);
+  position: relative;
+}
+
+.solution::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
 }
 
 .solution h2 {
   font-size: 35.6px;
   text-align: center;
   margin-bottom: 40px;
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
 .solution-content {
@@ -502,100 +590,152 @@ body {
 .solution-text h3 {
   font-size: 43.3px;
   margin-bottom: 20px;
+  color: var(--accent-primary);
+  font-weight: 700;
 }
 
 .solution-text p {
   font-size: 18.75px;
   line-height: 1.21;
   margin-bottom: 40px;
+  color: var(--text-secondary);
+}
+
+.solution-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.05), transparent);
+  transition: left 0.6s ease;
+}
+
+.solution-card:hover::before {
+  left: 100%;
+}
+
+.solution-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+  background: rgba(26, 31, 46, 0.8);
 }
 
 /* Footer Styles */
 .footer {
-  background-color: var(--background-color);
-  padding: 80px 0 40px;
+  background: var(--secondary-bg);
+  padding: 30px 0;
+  border-top: 1px solid rgba(0, 217, 255, 0.1);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
 }
 
 .footer-content {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.footer-brand h2 {
-  font-size: 44.25px;
-  margin-bottom: 10px;
-  opacity: 0.88;
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
 }
 
-.footer-brand p {
+.footer-brand {
+  font-size: 20px;
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.footer-separator {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.footer-email {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-email:hover {
+  color: var(--accent-primary);
+}
+
+.footer-center {
+  flex: 1;
+  text-align: center;
+}
+
+.copyright {
   font-size: 13px;
-  margin-bottom: 20px;
-  opacity: 0.65;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.footer-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .social-links {
   display: flex;
-  gap: 20px;
-  opacity: 0.65;
+  gap: 16px;
+  align-items: center;
+}
+
+.social-link {
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 217, 255, 0.05);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+}
+
+.social-link:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  background: rgba(0, 217, 255, 0.1);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
 }
 
 .social-link img {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) saturate(100%) invert(89%) sepia(6%) saturate(362%) hue-rotate(182deg) brightness(95%) contrast(87%);
 }
 
-.footer-newsletter h3 {
-  font-size: 22.7px;
-  margin-bottom: 30px;
-}
-
-.newsletter-form {
-  opacity: 0.78;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
-.form-group input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--text-color);
-  border-radius: 4px;
-  font-size: 15px;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14.9px;
-}
-
-.footer-links {
-  grid-column: 1 / -1;
-  display: flex;
-  gap: 20px;
-  opacity: 0.65;
-}
-
-.footer-links a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.copyright {
-  grid-column: 1 / -1;
-  font-size: 12.8px;
-  opacity: 0.52;
+.social-link:hover img {
+  filter: brightness(0) saturate(100%) invert(70%) sepia(99%) saturate(2799%) hue-rotate(160deg) brightness(101%) contrast(106%);
 }
 
 /* Responsive Styles */
@@ -620,7 +760,21 @@ body {
   }
 
   .footer-content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .footer-left {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
@@ -629,8 +783,24 @@ body {
     font-size: 40px;
   }
 
-  .footer-links {
-    flex-direction: column;
+  .footer {
+    padding: 24px 0;
+  }
+
+  .footer-content {
+    gap: 12px;
+  }
+
+  .footer-left {
+    font-size: 14px;
+  }
+
+  .footer-brand {
+    font-size: 18px;
+  }
+
+  .copyright {
+    font-size: 12px;
   }
 }
 </style>
