@@ -186,7 +186,7 @@
     </section>
 
     <!-- Vision Section -->
-    <VisionSection />
+    <!-- <VisionSection /> -->
 
     <!-- CTA Hub - Replaces old footer newsletter -->
     <CtaHub />
