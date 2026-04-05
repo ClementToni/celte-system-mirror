@@ -1,806 +1,718 @@
 <template>
-  <div class="landing-page">
-    <!-- Header -->
-    <header class="header">
-      <div class="container">
-        <div class="header-content">
-          <div class="flex items-center justify-between w-full">
-            <img src="/public/celte-logo-white.png" alt="Celte" class="w-10 h-10" />
-            <h1 class="text-5xl absolute left-1/2 transform -translate-x-1/2">Celte</h1>
-            <nav class="nav-menu">
-              <!-- <a href="#" class="nav-link active">Home</a> -->
-              <a href="https://zcal.co/clement-toni/30min" class="nav-link" target="_blank">Call Us</a>
-              <!-- <a href="https://celte-team.github.io" class="nav-link" target="_blank">Documentation</a> -->
-            </nav>
-          </div>
-        </div>
+  <div>
+    <AppNav />
+
+    <!-- ─── Hero ─────────────────────────────────────────────── -->
+    <section class="hero">
+      <div class="hero-bg">
+        <div class="hero-glow" />
+        <div class="hero-grid" />
       </div>
-    </header>
-
-    <!-- Sticky CTA Bar -->
-    <StickyCtaBar />
-
-    <!-- Hero Section - Improved -->
-    <section class="hero-section flex flex-col items-center">
-      <!-- Background Video -->
-      <video autoplay loop muted playsinline class="hero-background-video">
-        <source src="/videos/dynamic-server-meshing.mp4" type="video/mp4">
-      </video>
-
-      <!-- Overlay to ensure text readability -->
-      <div class="hero-overlay"></div>
-
-      <div class="text-center max-w-4xl mx-auto px-5 mb-16 relative z-10">
-
-        <!-- Main Headline -->
-        <h1 class="text-5xl md:text-7xl leading-tight tracking-[-0.042em] text-white font-bold mb-6">
-          Multiplayer games are limited to 200 players per server.<br />
-          <span class="text-[#00D9FF]">What if they weren't?</span>
+      <div class="container">
+        <div class="eyebrow">Dynamic Server Meshing · GDK</div>
+        <h1 class="hero-h1">
+          Dynamic server meshing<br />
+          for every game studio.
         </h1>
-
-        <!-- Subheadline with metrics -->
-        <!-- <p class="text-xl md:text-2xl leading-relaxed text-[#0047FF] opacity-90 mb-8">
-          Celte enables <strong>10,000+ concurrent players</strong> on unlimited maps<br />
-          with <strong>40% lower server costs</strong>
+        <p class="hero-sub">
+          The GDK that makes infinite player worlds possible.
+          <!-- <br /> -->
+          <!-- Built in Rust. Available for Unity, C# and any language via FFI. -->
         </p>
-        -->
-
-        <!-- Impact Metrics -->
-        <!-- <div class="flex flex-wrap justify-center gap-8 mb-10">
-          <div class="metric">
-            <div class="text-4xl font-bold text-[#0047FF]">10,000+</div>
-            <div class="text-sm text-[#0047FF] opacity-75">Concurrent Players</div>
-          </div>
-          <div class="metric">
-            <div class="text-4xl font-bold text-[#0047FF]">40%</div>
-            <div class="text-sm text-[#0047FF] opacity-75">Cost Reduction</div>
-          </div>
-          <div class="metric">
-            <div class="text-4xl font-bold text-[#0047FF]">Unlimited</div>
-            <div class="text-sm text-[#0047FF] opacity-75">Map Size</div>
-          </div>
-          <div class="metric">
-            <div class="text-4xl font-bold text-[#0047FF]">Zero</div>
-            <div class="text-sm text-[#0047FF] opacity-75">Loading Screens</div>
-          </div>
-        </div> -->
-
-        <!-- CTAs -->
-        <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-          <a href="mailto:celte.system@gmail.com?subject=Investor Inquiry" class="inline-block px-8 py-4 bg-[#0047FF] text-white rounded-full text-lg font-bold border-2 border-[#0047FF] transition-all hover:bg-transparent hover:text-[#0047FF] shadow-lg">
-            Join Seed Round
-          </a>
-          <a href="#demo-map" class="inline-block px-8 py-4 bg-transparent text-[#0047FF] rounded-full text-lg font-bold border-2 border-[#0047FF] transition-all hover:bg-[#0047FF] hover:text-white">
-            See The Technology
+        <!-- <div class="hero-actions">
+          <NuxtLink to="/contact" class="btn-primary">Get early access →</NuxtLink>
+          <a href="https://docs.celte.dev" target="_blank" rel="noopener" class="btn-ghost">
+            Read the docs
           </a>
         </div> -->
+        <div class="stats-band">
+          <div v-for="(stat, i) in stats" :key="stat.val">
+            <div class="stat">
+              <span class="stat-val">{{ stat.val }}</span>
+              <span class="stat-key">{{ stat.key }}</span>
+            </div>
+            <span v-if="i < stats.length - 1" class="sep">·</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Problem Section -->
-    <ProblemSection />
-    <ServerMeshMap id="demo-map" />
-    <!-- <AwsPriceComparison /> -->
-    <!-- <CostComparison /> -->
-    <!-- Features Section -->
-    <section class="features" id="learn-more">
+    <!-- ─── Statement ─────────────────────────────────────────── -->
+    <section class="statement">
       <div class="container">
-        <h2>Efficient Solutions</h2>
-        <p class="section-subtitle">
-          Our innovating approach ensures efficient solutions that reduce server costs while enhancing player experience.
+        <p class="statement-text">
+          <span class="t-muted">We make impossible</span><br />
+          <span class="t-accent">massive games a reality.</span>
         </p>
+        <div class="statement-rule" />
+      </div>
+    </section>
+
+    <!-- ─── Scroll reveal: allocation ────────────────────────── -->
+    <section ref="revealLeft" class="reveal-section">
+      <div class="reveal-inner container">
+        <div class="reveal-text-col">
+          <p ref="revealText1" class="reveal-text">
+            <span v-for="w in leftWords" :key="w.id" class="word">{{ w.t }}</span>
+          </p>
+        </div>
+        <div class="reveal-callout-col">
+          <div class="callout">
+            <div class="callout-stat">
+              <span class="callout-val">&lt;&nbsp;1ms</span>
+              <span class="callout-unit">overhead</span>
+            </div>
+            <h3 class="callout-title">Authority transfer</h3>
+            <p class="callout-desc">
+              When players cross server boundaries, Celte hands off authority in microseconds.
+              No pop-ins. No loading screens. No latency spikes.
+            </p>
+            <NuxtLink to="/technology" class="callout-link">See how it works →</NuxtLink>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Scroll reveal: scaling ────────────────────────────── -->
+    <section ref="revealRight" class="reveal-section reveal-section--rev">
+      <div class="reveal-inner container">
+        <div class="reveal-callout-col">
+          <div class="callout">
+            <div class="callout-stat">
+              <span class="callout-val">up to –40%</span>
+              <span class="callout-unit">infra costs</span>
+            </div>
+            <h3 class="callout-title">Pay for players, not servers</h3>
+            <p class="callout-desc">
+              Server capacity scales with your CCU in real time. Idle servers shut down
+              automatically. Peak loads spin up instantly.
+            </p>
+            <div class="graph-schematic">
+              <div class="graph-row">
+                <span class="graph-label">CCU</span>
+                <div class="graph-bars">
+                  <div
+                    v-for="(h, i) in graphBars"
+                    :key="i"
+                    class="graph-bar ccu-bar"
+                    :style="{ height: h + '%' }"
+                  />
+                </div>
+              </div>
+              <div class="graph-row">
+                <span class="graph-label">Servers</span>
+                <div class="graph-bars">
+                  <div
+                    v-for="(h, i) in serverBars"
+                    :key="i"
+                    class="graph-bar srv-bar"
+                    :style="{ height: h + '%' }"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal-text-col">
+          <p ref="revealText2" class="reveal-text">
+            <span v-for="w in rightWords" :key="w.id" class="word">{{ w.t }}</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Features ─────────────────────────────────────────── -->
+    <section id="product" class="features">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">How it works</div>
+          <h2 class="section-title">Built for scale from day one.</h2>
+        </div>
         <div class="features-grid">
-          <div class="feature-card flex flex-col items-center justify-center">
-            <div class="feature-icon flex justify-center items-center">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7L12 12L22 7L12 2Z" />
-                <path d="M2 17L12 22L22 17" />
-                <path d="M2 12L12 17L22 12" />
-              </svg>
-            </div>
-            <!-- We are able to dynamically split your map into multiple smaller zones, and distribute them across multiple servers
-             a lot of player mean a lot of servers when there is less player, the servers will be merged into fewer zones.
-            -->
-            <h3>Reduce server cost</h3>
-            <p class="text-lg leading-relaxed text-justify">
-              With Celte, you only use the servers you need, cutting unnecessary costs. <br> By dynamically scaling infrastructure based on real-time demand.
-              <!-- Celte's server meshing technology optimizes resource allocation, ensuring you only use the servers you need, cutting unnecessary costs. By dynamically scaling infrastructure based on real-time demand, studios can reduce expenses while maintaining high performance. -->
-              <!-- Celte's server meshing technology optimizes resource allocation by distributing the game world across different nodes instead of relying on a single dedicated server. This means more players, larger worlds, and seamless scalability without performance bottlenecks. -->
-            </p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon flex justify-center items-center">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 12H18L15 21L9 3L6 12H2" />
-              </svg>
-            </div>
-            <h3>Transform Your Infrastructure into a Scalable, Dynamic System</h3>
-            <p class="text-lg leading-relaxed text-justify">
-              <!-- Our technology automatically divides your map into smaller, manageable zones and intelligently distributes them across multiple servers. -->
-              <!-- <br> -->
-              As player activity increases, more servers are deployed to handle the load. When activity drops, zones are efficiently merged, reducing the number of active servers.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon flex justify-center items-center">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 3h18v18H3z"/>
-                <path d="M3 9h18"/>
-                <path d="M3 15h18"/>
-                <path d="M9 3v18"/>
-                <path d="M15 3v18"/>
-              </svg>
-            </div>
-            <h3>Unlimited Map Size</h3>
-            <p class="text-lg leading-relaxed text-justify">
-              Break map size limits with Celte's server meshing. Build seamless, dynamic worlds without boundaries or loading screens—just endless possibilities.
-            </p>
-          </div>
-
-        <!-- <AwsComparison /> -->
-
-          <!-- <div class="feature-card">
-            <div class="feature-icon flex justify-center items-center">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" />
-                <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" />
-                <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" />
-                <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" />
-              </svg>
-            </div>
-            <h3>Expert Support</h3>
-            <p>
-              Count on Celte for expert support in server-side development. Our dedicated team is committed to ensuring your systems run smoothly, providing reliable assistance whenever you need it.
-            </p>
-          </div> -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Traction Section -->
-    <!-- <TractionSection /> -->
-
-    <!-- Solution Section -->
-    <section class="solution">
-      <div class="">
-        <h2 class="text-center text-4xl mb-14 text-white font-bold">Our Solution</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-32 max-w-6xl mx-auto px-8 mt-12">
-          <div class="solution-card bg-[#1A1F2E]/60 backdrop-blur-lg border border-[#00D9FF]/20 p-8 rounded-xl">
-            <h3 class="text-3xl mb-4 text-[#00D9FF] font-bold">What is Server Meshing?</h3>
-            <p class="text-lg leading-relaxed text-justify text-[#9CA3AF]">
-              Server meshing is a revolutionary technology that allows multiple servers to work together dynamically, distributing the game world across different nodes instead of relying on a single dedicated server. This means more players, larger worlds, and seamless scalability without performance bottlenecks.
-            </p>
-          </div>
-          <div class="solution-card bg-[#1A1F2E]/60 backdrop-blur-lg border border-[#00D9FF]/20 p-8 rounded-xl">
-            <h3 class="text-3xl mb-4 text-[#00D9FF] font-bold">Why is it game changer?</h3>
-            <p class="text-lg leading-relaxed text-justify text-[#9CA3AF]">
-              Traditional servers struggle with high player counts and complex environments, leading to lag, crashes, and high costs. With Celte's server meshing, studios can scale efficiently, reduce server expenses, and deliver a fluid, uninterrupted gaming experience—ensuring players stay immersed, no matter how big the game gets.
-            </p>
+          <div v-for="(f, i) in features" :key="f.title" class="feature-card">
+            <span class="feature-num">0{{ i + 1 }}</span>
+            <h3 class="feature-title">{{ f.title }}</h3>
+            <p class="feature-desc">{{ f.desc }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Vision Section -->
-    <!-- <VisionSection /> -->
-
-    <!-- CTA Hub - Replaces old footer newsletter -->
-    <!-- <CtaHub /> -->
-
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- ─── CTA ───────────────────────────────────────────────── -->
+    <section class="cta-band">
       <div class="container">
-        <div class="footer-content">
-          <div class="footer-left">
-            <span class="footer-brand">Celte</span>
-            <span class="footer-separator">•</span>
-            <a href="mailto:celte.system@gmail.com" class="footer-email">celte.system@gmail.com</a>
-          </div>
-
-          <div class="footer-center">
-            <p class="copyright">© 2026 Celte. All rights reserved.</p>
-          </div>
-
-          <div class="footer-right">
-            <div class="social-links">
-              <a href="https://x.com/CelteSystem" class="social-link" target="_blank" rel="noopener noreferrer">
-                <img src="/images/x-icon.svg" alt="X (Twitter)" />
-              </a>
-              <a href="https://www.linkedin.com/company/celte-system" class="social-link" target="_blank" rel="noopener noreferrer">
-                <img src="/images/linkedin-icon.svg" alt="LinkedIn" />
-              </a>
-            </div>
-          </div>
+        <h2 class="cta-h2">
+          Ready to build the next<br />
+          generation of multiplayer?
+        </h2>
+        <div class="cta-actions">
+          <NuxtLink to="/contact" class="btn-primary">Get early access →</NuxtLink>
+          <NuxtLink to="/technology" class="btn-ghost">See how it works</NuxtLink>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <div>
-      <!-- <AwsComparison /> -->
-    </div>
+    <AppFooter />
   </div>
 </template>
 
-<script setup>
-import AboutSection from '~/components/AboutSection.vue'
-import ProblemSection from '~/components/ProblemSection.vue'
-import TractionSection from '~/components/TractionSection.vue'
-import VisionSection from '~/components/VisionSection.vue'
-import CtaHub from '~/components/CtaHub.vue'
-import StickyCtaBar from '~/components/StickyCtaBar.vue'
+<script setup lang="ts">
+definePageMeta({ layout: false })
+
+const stats = [
+  { val: '< 1ms', key: 'authority transfer' },
+  { val: '∞', key: 'players per world' },
+  { val: '–40%', key: 'infra costs' },
+  { val: 'Any language', key: 'via FFI' },
+]
+
+const LEFT_TEXT =
+  'We dynamically allocate resources in real time, without loading time.'
+const RIGHT_TEXT =
+  'We scale your servers up and down automatically. You only pay for what your players use.'
+
+const leftWords = LEFT_TEXT.split(' ').map((t, id) => ({ id, t }))
+const rightWords = RIGHT_TEXT.split(' ').map((t, id) => ({ id, t }))
+
+const graphBars = [18, 30, 52, 78, 95, 88, 65, 72, 90, 68, 42, 22]
+const serverBars = graphBars.map((h) => Math.round(h * 0.85 + Math.random() * 8))
+
+const features = [
+  {
+    title: 'Authority Transfer',
+    desc: 'Players cross server zones with zero interruption. Authority hands off in microseconds via a Rust-native protocol, invisible to the player.',
+  },
+  {
+    title: 'Load Balancing',
+    desc: 'Game entities are redistributed automatically across servers based on spatial density and compute load. No manual shard configuration.',
+  },
+  {
+    title: 'Dynamic Scaling',
+    desc: 'Server instances spin up and down with your CCU curve. Peak loads are absorbed in real time. Idle capacity is reclaimed immediately.',
+  },
+  {
+    title: 'Any Language',
+    desc: 'The Celte core is pure Rust. A native C# SDK targets Unity directly. Every other language is supported through a stable, battle-tested FFI layer.',
+  },
+]
+
+const revealLeft = ref<HTMLElement>()
+const revealRight = ref<HTMLElement>()
+const revealText1 = ref<HTMLElement>()
+const revealText2 = ref<HTMLElement>()
+
+function setupReveal(sectionEl: HTMLElement, textEl: HTMLElement): () => void {
+  const words = textEl.querySelectorAll<HTMLElement>('.word')
+
+  const update = () => {
+    const { top, height } = sectionEl.getBoundingClientRect()
+    const vh = window.innerHeight
+    const progress = (vh * 0.85 - top) / (height * 0.7)
+
+    words.forEach((word, i) => {
+      const threshold = i / words.length
+      const opacity = Math.max(0.15, Math.min(1, (progress - threshold * 0.5) * 2.5))
+      word.style.opacity = String(opacity)
+    })
+  }
+
+  window.addEventListener('scroll', update, { passive: true })
+  update()
+  return () => window.removeEventListener('scroll', update)
+}
+
+onMounted(() => {
+  if (!revealLeft.value || !revealText1.value) return
+  if (!revealRight.value || !revealText2.value) return
+
+  const c1 = setupReveal(revealLeft.value, revealText1.value)
+  const c2 = setupReveal(revealRight.value, revealText2.value)
+
+  onUnmounted(() => {
+    c1()
+    c2()
+  })
+})
 </script>
 
-<style>
-/* Global Styles - Electric Blue Deep Tech Theme */
-:root {
-  /* Dark Matter Backgrounds */
-  --primary-bg: #0A0E1A;
-  --secondary-bg: #1A1F2E;
-  --card-bg: rgba(26, 31, 46, 0.6);
-
-  /* Electric Blue Accents */
-  --accent-primary: #00D9FF;
-  --accent-secondary: #0084FF;
-  --accent-glow: #7B61FF;
-
-  /* Text Colors */
-  --text-primary: #E5E7EB;
-  --text-secondary: #9CA3AF;
-  --text-muted: #6B7280;
-
-  /* Glow Effects */
-  --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.3);
-  --glow-cyan-hover: 0 0 30px rgba(0, 217, 255, 0.5);
-  --glow-violet: 0 0 20px rgba(123, 97, 255, 0.3);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  color: var(--text-primary);
-  background-color: var(--primary-bg);
-  background-image:
-    radial-gradient(at 0% 0%, rgba(0, 217, 255, 0.03) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(123, 97, 255, 0.03) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(0, 132, 255, 0.03) 0px, transparent 50%);
-  background-attachment: fixed;
-}
-
+<style scoped>
+/* ── Layout ─────────────────────────────────────────────────── */
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 2rem;
 }
 
-/* Header Styles */
-.header {
-  background: rgba(10, 14, 26, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 217, 255, 0.1);
-  padding: 20px 0;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo h1 {
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--accent-primary);
-}
-
-.nav-menu {
-  display: flex;
-  gap: 30px;
-}
-
-.nav-link {
-  color: var(--text-primary);
-  text-decoration: none;
-  font-size: 15.5px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.nav-link:hover {
-  color: var(--accent-primary);
-  text-shadow: var(--glow-cyan);
-}
-
-.nav-link.active {
-  font-weight: 500;
-  color: var(--accent-primary);
-}
-
-/* Hero Section Styles */
-.hero-section {
-  position: relative;
-  overflow: hidden;
-  min-height: 80vh;
-  padding-top: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--primary-bg) 0%, #0D1525 50%, var(--secondary-bg) 100%);
-}
-
-.hero-background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
-  opacity: 0.4;
-  filter: brightness(0.6) contrast(1.2);
-}
-
-/* Ensure video covers on mobile */
-@media (max-width: 768px) {
-  .hero-section {
-    min-height: 100vh;
-    padding-top: 80px;
-    padding-bottom: 40px;
-  }
-
-  .hero-background-video {
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
-              linear-gradient(180deg, rgba(10, 14, 26, 0.3) 0%, rgba(10, 14, 26, 0.8) 100%);
-  z-index: 1;
-}
-
-.hero {
-  min-height: 100vh;
-  background: radial-gradient(circle at center, #001233 0%, #000B1F 100%);
-  display: flex;
-  flex-direction: column;
-  padding-top: 100px;
-}
-
-.hero-text {
-  color: var(--primary-color);
-  text-align: center;
-  padding: 60px 20px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.hero-text h1 {
-  font-size: 66px;
-  line-height: 1.16;
-  letter-spacing: -0.042em;
-  margin-bottom: 20px;
-  color: var(--text-primary);
-  font-weight: 700;
-  text-shadow: var(--glow-cyan);
-}
-
-.hero-text p {
-  font-size: 18.6px;
-  line-height: 1.5;
-  margin-bottom: 30px;
-  color: var(--text-secondary);
-  opacity: 0.9;
-}
-
-.hero-image-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-image {
-  width: 80%;
-  height: auto;
-  object-fit: cover;
-}
-
+/* ── Buttons ─────────────────────────────────────────────────── */
 .btn-primary {
-  display: inline-block;
-  padding: 12px 30px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  color: var(--primary-bg);
-  text-decoration: none;
-  border-radius: 100px;
-  font-size: 15px;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  box-shadow: var(--glow-cyan);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s ease;
-}
-
-.btn-primary:hover::before {
-  left: 100%;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: #030705;
+  border-radius: 6px;
+  letter-spacing: 0.01em;
+  transition: opacity 0.2s, transform 0.15s;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--glow-cyan-hover);
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
-/* Features Section Styles */
-.features {
-  padding: 80px 0;
-  background: var(--secondary-bg);
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 12px 28px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 6px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(212, 235, 235, 0.4);
+  color: var(--text);
+}
+
+/* ── Eyebrow / labels ────────────────────────────────────────── */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+.hero {
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 7rem 0 5rem;
+  overflow: hidden;
 }
 
-.features::before {
-  content: '';
+.hero-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 90% 70% at 50% 40%,
+    rgba(128, 224, 199, 0.045) 0%,
+    transparent 65%
+  );
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.5;
+  -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 20%, transparent 75%);
+}
+
+.hero .container {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-h1 {
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  max-width: 820px;
+  margin-bottom: 1.75rem;
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text);
+  /* bold */
+  font-weight: 400;
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.stats-band {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  background: rgba(10, 23, 16, 0.6);
+}
+
+.stats-band > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-val {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.stat-key {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.sep {
+  color: var(--border);
+  font-size: 18px;
+  margin: 0 0.25rem;
+  align-self: center;
+}
+
+/* ── Statement ───────────────────────────────────────────────── */
+.statement {
+  padding: 8rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.statement-text {
+  font-size: clamp(44px, 6.5vw, 88px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.t-muted {
+  color: rgba(212, 235, 235, 0.45);
+}
+
+.t-accent {
+  color: var(--accent);
+}
+
+.statement-rule {
+  width: 48px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  background: var(--accent);
+  margin-top: 3rem;
+  opacity: 0.5;
 }
 
-.features h2 {
-  font-size: 51.4px;
-  text-align: center;
-  margin-bottom: 20px;
-  color: var(--text-primary);
-  font-weight: 700;
+/* ── Scroll reveal sections ───────────────────────────────────── */
+.reveal-section {
+  padding: 9rem 0;
+  border-top: 1px solid var(--border);
 }
 
-.section-subtitle {
-  font-size: 16.7px;
-  text-align: center;
-  margin-bottom: 60px;
-  color: var(--text-secondary);
+.reveal-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.reveal-text-col,
+.reveal-callout-col {
+  min-width: 0;
+}
+
+.reveal-section--rev .reveal-inner {
+  direction: rtl;
+}
+
+.reveal-section--rev .reveal-text-col,
+.reveal-section--rev .reveal-callout-col {
+  direction: ltr;
+}
+
+.reveal-text {
+  font-size: clamp(28px, 3.5vw, 50px);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.word {
+  display: inline-block;
+  opacity: 0.15;
+  transition: opacity 0.1s;
+  margin-right: 0.22em;
+}
+
+/* ── Callout ────────────────────────────────────────────────── */
+.callout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(10, 23, 16, 0.5);
+}
+
+.callout-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.callout-val {
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.callout-unit {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.callout-title {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.callout-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.callout-link {
+  font-size: 13px;
+  color: var(--accent);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  margin-top: 0.25rem;
+}
+
+.callout-link:hover {
+  opacity: 1;
+}
+
+/* ── Graph schematic ────────────────────────────────────────── */
+.graph-schematic {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.graph-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.graph-label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  width: 44px;
+  flex-shrink: 0;
+  padding-bottom: 2px;
+}
+
+.graph-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 32px;
+  flex: 1;
+}
+
+.graph-bar {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  min-height: 4px;
+}
+
+.ccu-bar {
+  background: var(--accent);
+  opacity: 0.7;
+}
+
+.srv-bar {
+  background: rgba(212, 235, 235, 0.3);
+}
+
+/* ── Features ───────────────────────────────────────────────── */
+.features {
+  padding: 9rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-top: 0.5rem;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  align-items: stretch;
-}
-
-.feature-card {
-  text-align: center;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  border: 1px solid rgba(0, 217, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-primary);
-  box-shadow: var(--glow-cyan);
-  background: rgba(26, 31, 46, 0.8);
-}
-
-.feature-icon {
-  height: 60px;
-  width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 30px;
-  color: var(--accent-primary);
-  background: rgba(0, 217, 255, 0.1);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px solid var(--border);
   border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover .feature-icon {
-  background: rgba(0, 217, 255, 0.2);
-  box-shadow: var(--glow-cyan);
-}
-
-.feature-card h3 {
-  font-size: 18.75px;
-  margin-bottom: 30px;
-  min-height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.feature-card p {
-  font-size: 15px;
-  line-height: 1.92;
-  flex-grow: 1;
-  display: flex;
-  align-items: flex-start;
-  margin: 0;
-  color: var(--text-secondary);
-}
-
-/* Solution Section Styles */
-.solution {
-  padding: 80px 0;
-  background: var(--primary-bg);
-  position: relative;
-}
-
-.solution::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
-}
-
-.solution h2 {
-  font-size: 35.6px;
-  text-align: center;
-  margin-bottom: 40px;
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-.solution-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.solution-text h3 {
-  font-size: 43.3px;
-  margin-bottom: 20px;
-  color: var(--accent-primary);
-  font-weight: 700;
-}
-
-.solution-text p {
-  font-size: 18.75px;
-  line-height: 1.21;
-  margin-bottom: 40px;
-  color: var(--text-secondary);
-}
-
-.solution-card {
-  transition: all 0.3s ease;
-  position: relative;
   overflow: hidden;
 }
 
-.solution-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.05), transparent);
-  transition: left 0.6s ease;
-}
-
-.solution-card:hover::before {
-  left: 100%;
-}
-
-.solution-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
-  background: rgba(26, 31, 46, 0.8);
-}
-
-/* Footer Styles */
-.footer {
-  background: var(--secondary-bg);
-  padding: 30px 0;
-  border-top: 1px solid rgba(0, 217, 255, 0.1);
-  position: relative;
-}
-
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-}
-
-.footer-content {
+.feature-card {
+  padding: 2.5rem 2rem;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1rem;
+  transition: background 0.25s;
 }
 
-.footer-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
+.feature-card:last-child {
+  border-right: none;
 }
 
-.footer-brand {
-  font-size: 20px;
-  color: var(--accent-primary);
-  font-weight: 700;
+.feature-card:hover {
+  background: var(--surface);
 }
 
-.footer-separator {
-  color: var(--text-muted);
-  font-size: 14px;
+.feature-num {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  opacity: 0.7;
 }
 
-.footer-email {
-  font-size: 14px;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: all 0.3s ease;
+.feature-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.02em;
 }
 
-.footer-email:hover {
-  color: var(--accent-primary);
+.feature-desc {
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--muted);
 }
 
-.footer-center {
-  flex: 1;
+/* ── CTA band ───────────────────────────────────────────────── */
+.cta-band {
+  padding: 9rem 0;
+  border-top: 1px solid var(--border);
   text-align: center;
 }
 
-.copyright {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin: 0;
+.cta-h2 {
+  font-size: clamp(32px, 4.5vw, 58px);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
 }
 
-.footer-right {
-  flex: 1;
+.cta-actions {
   display: flex;
-  justify-content: flex-end;
-}
-
-.social-links {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.social-link {
-  transition: all 0.3s ease;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
+  gap: 1rem;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(0, 217, 255, 0.05);
-  border: 1px solid rgba(0, 217, 255, 0.1);
+  flex-wrap: wrap;
 }
 
-.social-link:hover {
-  opacity: 1;
-  transform: translateY(-2px);
-  background: rgba(0, 217, 255, 0.1);
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
-}
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .reveal-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    direction: ltr !important;
+  }
 
-.social-link img {
-  width: 16px;
-  height: 16px;
-  filter: brightness(0) saturate(100%) invert(89%) sepia(6%) saturate(362%) hue-rotate(182deg) brightness(95%) contrast(87%);
-}
-
-.social-link:hover img {
-  filter: brightness(0) saturate(100%) invert(70%) sepia(99%) saturate(2799%) hue-rotate(160deg) brightness(101%) contrast(106%);
-}
-
-/* Responsive Styles */
-@media (max-width: 1024px) {
-  .hero-text h1 {
-    font-size: 50px;
+  .reveal-section--rev .reveal-text-col {
+    order: 2;
   }
 
   .features-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feature-card:nth-child(2) {
+    border-right: none;
+  }
+
+  .feature-card:nth-child(3) {
+    border-right: 1px solid var(--border);
   }
 }
 
-@media (max-width: 768px) {
-  .hero-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
+@media (max-width: 600px) {
   .features-grid {
     grid-template-columns: 1fr;
   }
 
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 16px;
+  .feature-card {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
   }
 
-  .footer-left,
-  .footer-center,
-  .footer-right {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .footer-left {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-text h1 {
-    font-size: 40px;
-  }
-
-  .footer {
-    padding: 24px 0;
-  }
-
-  .footer-content {
-    gap: 12px;
-  }
-
-  .footer-left {
-    font-size: 14px;
-  }
-
-  .footer-brand {
-    font-size: 18px;
-  }
-
-  .copyright {
-    font-size: 12px;
+  .feature-card:last-child {
+    border-bottom: none;
   }
 }
 </style>
