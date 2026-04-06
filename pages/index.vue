@@ -272,7 +272,7 @@ onMounted(() => {
   font-weight: 300;
   padding: 12px 28px;
   border: 1px solid var(--text);
-  color: var(--muted);
+  color: var(--text);
   border-radius: 6px;
   transition: border-color 0.2s, color 0.2s;
 }

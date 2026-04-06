@@ -335,7 +335,8 @@ function reset() {
   padding: 12px 16px;
   font-size: 14px;
   font-weight: 300;
-  color: var(--text);
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s, background 0.2s;
@@ -344,7 +345,9 @@ function reset() {
 }
 
 .field-input::placeholder {
-  color: rgba(212, 235, 235, 0.35);
+  color: rgba(255, 255, 255, 0.6);
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
 }
 
 .field-input:focus {
@@ -358,7 +361,6 @@ function reset() {
 
 .field-textarea {
   min-height: 130px;
-  color: var(--text);
 }
 
 .field-error {
