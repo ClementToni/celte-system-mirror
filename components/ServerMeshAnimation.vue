@@ -166,9 +166,23 @@ function getServerForPlayer(px: number, py: number): Server | null {
 function spawnPlayer(t: number) {
   const dormant = players.filter((p) => p.targetAlpha === 0)
   if (dormant.length === 0) return
+
+  const activeServers = servers.filter((s) => s.alpha > 0.5)
+  const target = activeServers.length > 0
+    ? activeServers.reduce((min, s) => {
+        const count = players.filter((p) => p.targetAlpha === 1 && p.serverId === s.id).length
+        return count < players.filter((p) => p.targetAlpha === 1 && p.serverId === min.id).length ? s : min
+      })
+    : null
+
   const p = dormant[Math.floor(Math.random() * dormant.length)]
-  p.x = 0.05 + Math.random() * 0.9
-  p.y = 0.05 + Math.random() * 0.9
+  if (target) {
+    p.x = target.x + 0.05 + Math.random() * Math.max(0, target.w - 0.1)
+    p.y = target.y + 0.05 + Math.random() * Math.max(0, target.h - 0.1)
+  } else {
+    p.x = 0.05 + Math.random() * 0.9
+    p.y = 0.05 + Math.random() * 0.9
+  }
   p.vx = (Math.random() - 0.5) * 0.0022
   p.vy = (Math.random() - 0.5) * 0.0022
   p.trail = []
@@ -373,6 +387,23 @@ function draw(ctx: CanvasRenderingContext2D, W: number, H: number, t: number) {
   }
 
   // ── Update players ───────────────────────────────────────────
+  // Pre-compute: for each empty server, find the id of the closest active player
+  const attractedIds = new Set<number>()
+  servers.forEach((s) => {
+    if (s.alpha < 0.5) return
+    const occupied = players.some((p) => p.targetAlpha === 1 && p.serverId === s.id)
+    if (occupied) return
+    const cx = s.x + s.w / 2, cy = s.y + s.h / 2
+    let closest: Player | null = null
+    let minDist = Infinity
+    players.forEach((p) => {
+      if (p.alpha < 0.05 || p.targetAlpha !== 1) return
+      const d = (p.x - cx) ** 2 + (p.y - cy) ** 2
+      if (d < minDist) { minDist = d; closest = p }
+    })
+    if (closest) attractedIds.add((closest as Player).id)
+  })
+
   players.forEach((p) => {
     if (p.alpha < 0.05) return
 
@@ -385,13 +416,27 @@ function draw(ctx: CanvasRenderingContext2D, W: number, H: number, t: number) {
     if (p.x < 0.01 || p.x > 0.99) { p.vx *= -1; p.x = Math.max(0.01, Math.min(0.99, p.x)) }
     if (p.y < 0.01 || p.y > 0.99) { p.vy *= -1; p.y = Math.max(0.01, Math.min(0.99, p.y)) }
 
-    // if (Math.random() < 0.006) {
-    //   p.vx += (Math.random() - 0.5) * 0.0012
-    //   p.vy += (Math.random() - 0.5) * 0.0012
-    //   const spd = Math.sqrt(p.vx ** 2 + p.vy ** 2)
-    //   const max = 0.003
-    //   if (spd > max) { p.vx = (p.vx / spd) * max; p.vy = (p.vy / spd) * max }
-    // }
+    if (Math.random() < 0.006) {
+      p.vx += (Math.random() - 0.5) * 0.0012
+      p.vy += (Math.random() - 0.5) * 0.0012
+    }
+
+    // Only the closest player to each empty server gets attracted
+    if (attractedIds.has(p.id)) {
+      const ATTRACT = 0.00008
+      servers.forEach((s) => {
+        if (s.alpha < 0.5) return
+        const occupied = players.some((q) => q !== p && q.targetAlpha === 1 && q.serverId === s.id)
+        if (!occupied) {
+          p.vx += (s.x + s.w / 2 - p.x) * ATTRACT
+          p.vy += (s.y + s.h / 2 - p.y) * ATTRACT
+        }
+      })
+    }
+
+    const spd = Math.sqrt(p.vx ** 2 + p.vy ** 2)
+    const max = 0.003
+    if (spd > max) { p.vx = (p.vx / spd) * max; p.vy = (p.vy / spd) * max }
 
     // Authority transfer detection
     const sv = getServerForPlayer(p.x, p.y)
