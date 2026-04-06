@@ -56,7 +56,7 @@ const pricing = [
       "24/7 Phone Support",
     ],
     button: {
-      text: "Contact us",
+      text: "Contact Us →",
       link: "/contact",
     },
   },
