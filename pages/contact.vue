@@ -15,7 +15,7 @@
               reach you as soon as possible.
             </p>
 
-            <div class="contact-details">
+            <!-- <div class="contact-details">
               <div class="detail">
                 <span class="detail-label">Response time</span>
                 <span class="detail-val">&lt; 24h</span>
@@ -28,7 +28,7 @@
                 <span class="detail-label">Early access</span>
                 <span class="detail-val">Open now</span>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <!-- Right: form -->
@@ -176,10 +176,15 @@ async function handleSubmit() {
   if (!validate()) return
 
   submitting.value = true
-  // Simulate async submission (replace with actual endpoint)
-  await new Promise((r) => setTimeout(r, 1000))
-  submitting.value = false
-  submitted.value = true
+  try {
+    await $fetch('https://formspree.io/f/mlgoaozw', {
+      method: 'POST',
+      body: { ...form },
+    })
+    submitted.value = true
+  } finally {
+    submitting.value = false
+  }
 }
 
 function reset() {

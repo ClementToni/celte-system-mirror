@@ -9,7 +9,7 @@
       <nav class="links">
         <a href="/#product" class="link">Product</a>
         <NuxtLink to="/technology" class="link">Technology</NuxtLink>
-        <a href="https://docs.celte.dev" target="_blank" rel="noopener" class="link">Docs</a>
+        <!-- <a href="https://docs.celte.dev" target="_blank" rel="noopener" class="link">Docs</a> -->
         <NuxtLink to="/contact" class="cta">Contact Us →</NuxtLink>
       </nav>
     </div>
@@ -88,7 +88,7 @@ onMounted(() => {
 .link {
   font-size: 14px;
   font-weight: 300;
-  color: var(--muted);
+  color: var(--text);
   transition: color 0.2s;
 }
 

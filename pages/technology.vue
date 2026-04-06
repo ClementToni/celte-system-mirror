@@ -234,6 +234,8 @@
       </div>
     </section>
 
+
+
     <!-- ─── Stack ────────────────────────────────────────────── -->
     <!-- <section class="stack-section">
       <div class="container">
@@ -277,6 +279,82 @@ import type { Ref } from 'vue'
 definePageMeta({ layout: false })
 
 const anim = ref<{ activePlayers: Ref<number>; activeServers: Ref<number> } | null>(null)
+
+const costSection = ref<HTMLElement>()
+const staticPath = ref<SVGPathElement>()
+const celtePath = ref<SVGPathElement>()
+const savingsFill = ref<SVGPathElement>()
+const savingsPct = ref(0)
+const chartAnimated = ref(false)
+
+function easeInOut(t: number): number {
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+}
+
+function animateCostChart() {
+  if (chartAnimated.value) return
+  chartAnimated.value = true
+
+  const sPath = staticPath.value!
+  const cPath = celtePath.value!
+  const fill = savingsFill.value!
+
+  const sLen = sPath.getTotalLength()
+  const cLen = cPath.getTotalLength()
+
+  sPath.style.strokeDasharray = `${sLen}`
+  sPath.style.strokeDashoffset = `${sLen}`
+  cPath.style.strokeDasharray = `${cLen}`
+  cPath.style.strokeDashoffset = `${cLen}`
+  fill.style.opacity = '0'
+
+  const STATIC_DURATION = 500
+  const CELTE_DELAY = 150
+  const CELTE_DURATION = 1600
+  const FILL_DELAY = 900
+  const FILL_DURATION = 500
+  const COUNTER_DELAY = 500
+  const COUNTER_DURATION = 1200
+
+  const startTime = performance.now()
+
+  function tick(now: number) {
+    const elapsed = now - startTime
+
+    const sProgress = Math.min(1, elapsed / STATIC_DURATION)
+    sPath.style.strokeDashoffset = `${sLen * (1 - easeInOut(sProgress))}`
+
+    const cProgress = Math.min(1, Math.max(0, elapsed - CELTE_DELAY) / CELTE_DURATION)
+    cPath.style.strokeDashoffset = `${cLen * (1 - easeInOut(cProgress))}`
+
+    const fProgress = Math.min(1, Math.max(0, elapsed - FILL_DELAY) / FILL_DURATION)
+    fill.style.opacity = `${easeInOut(fProgress)}`
+
+    const ctProgress = Math.min(1, Math.max(0, elapsed - COUNTER_DELAY) / COUNTER_DURATION)
+    savingsPct.value = Math.round(easeInOut(ctProgress) * 30)
+
+    if (sProgress < 1 || cProgress < 1 || fProgress < 1 || ctProgress < 1) {
+      requestAnimationFrame(tick)
+    }
+  }
+
+  requestAnimationFrame(tick)
+}
+
+onMounted(() => {
+  if (!costSection.value) return
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        animateCostChart()
+        observer.disconnect()
+      }
+    },
+    { threshold: 0.25 },
+  )
+  observer.observe(costSection.value)
+  onUnmounted(() => observer.disconnect())
+})
 
 const stack = [
   {
@@ -353,7 +431,7 @@ const stack = [
   font-weight: 300;
   padding: 12px 28px;
   border: 1px solid var(--border);
-  color: var(--muted);
+  color: var(--text);
   border-radius: 6px;
   transition: border-color 0.2s, color 0.2s;
 }
@@ -396,7 +474,7 @@ const stack = [
   font-size: 17px;
   font-weight: 300;
   line-height: 1.7;
-  color: var(--muted);
+  color: var(--text);
   max-width: 580px;
 }
 
@@ -427,9 +505,10 @@ const stack = [
 }
 
 .anim-caption {
-  font-size: 14px;
+  /* font-size: 14px; */
+  font-size: 18px;
   font-weight: 300;
-  color: var(--muted);
+  color: var(--text);
   max-width: 560px;
   line-height: 1.65;
 }
@@ -466,7 +545,7 @@ const stack = [
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text);
 }
 
 /* ── Concepts ───────────────────────────────────────────────── */
@@ -555,7 +634,7 @@ const stack = [
 }
 
 .prop-key {
-  color: var(--muted);
+  color: var(--text);
   font-weight: 300;
 }
 
@@ -575,7 +654,7 @@ const stack = [
 .visual-note {
 
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text);
   letter-spacing: 0.02em;
   text-align: center;
   opacity: 1;
@@ -611,7 +690,7 @@ const stack = [
 
 .td-label {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--text);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -706,7 +785,7 @@ const stack = [
   font-size: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .lb-dots {
@@ -828,7 +907,7 @@ const stack = [
   display: flex;
   justify-content: space-between;
   font-size: 10px;
-  color: var(--muted);
+  color: var(--text);
   opacity: 0.6;
 }
 
@@ -845,7 +924,148 @@ const stack = [
 }
 
 .scale-legend-srv {
+  color: var(--text);
+}
+
+/* ── Cost section ───────────────────────────────────────────── */
+.cost-section {
+  padding: 7rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cost-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 3rem;
+}
+
+.cost-h2 {
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.cost-sub {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(212, 235, 235, 0.65);
+}
+
+.cost-chart-wrap {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem 2.5rem 0;
+  background: rgba(10, 23, 16, 0.4);
+  overflow: hidden;
+}
+
+.cost-svg {
+  width: 100%;
+  height: 190px;
+  display: block;
+}
+
+.savings-fill {
+  fill: rgba(128, 224, 199, 0.07);
+  stroke: none;
+}
+
+.static-line {
+  fill: none;
+  stroke: rgba(212, 235, 235, 0.3);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+}
+
+.celte-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cost-axis {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0 1.5rem;
+  font-size: 11px;
   color: var(--muted);
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--border);
+  margin-top: 0.25rem;
+}
+
+.savings-badge {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.savings-val {
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  min-width: 5ch;
+  text-align: right;
+}
+
+.savings-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.cost-legend {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.legend-line {
+  width: 24px;
+  height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.legend-line--static {
+  background: rgba(212, 235, 235, 0.3);
+}
+
+.legend-line--celte {
+  background: var(--accent);
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: rgba(128, 224, 199, 0.2);
+  flex-shrink: 0;
 }
 
 /* ── Stack section ──────────────────────────────────────────── */
@@ -892,7 +1112,7 @@ const stack = [
   font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text);
   font-weight: 400;
 }
 
@@ -941,6 +1161,11 @@ const stack = [
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
+  .cost-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
   .concept-body {
     grid-template-columns: 1fr;
     gap: 2.5rem;

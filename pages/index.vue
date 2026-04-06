@@ -138,6 +138,8 @@
       </div>
     </section>
 
+    <CostComparison />
+
     <!-- ─── CTA ───────────────────────────────────────────────── -->
     <section class="cta-band">
       <div class="container">
@@ -268,7 +270,7 @@ onMounted(() => {
   font-size: 14px;
   font-weight: 300;
   padding: 12px 28px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--text);
   color: var(--muted);
   border-radius: 6px;
   transition: border-color 0.2s, color 0.2s;
@@ -321,7 +323,7 @@ onMounted(() => {
   background-image: linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
   background-size: 72px 72px;
-  opacity: 0.5;
+  /* opacity: 0.8; */
   -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 20%, transparent 75%);
   mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 20%, transparent 75%);
 }
@@ -527,7 +529,7 @@ onMounted(() => {
 
 .callout-link {
   font-size: 13px;
-  color: var(--accent);
+  color: var(--text);
   opacity: 0.7;
   transition: opacity 0.2s;
   margin-top: 0.25rem;
