@@ -1,31 +1,20 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/i18n', 'nuxt-module-hotjar', '@nuxtjs/tailwindcss', '@vercel/analytics/nuxt'],
+  modules: [
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/tailwindcss',
+  ],
+
+  googleFonts: {
+    families: {
+      Onest: [300, 400, 500],
+    },
+    display: 'swap',
+  },
 
   tailwindcss: {
     cssPath: '~/assets/css/main.css',
     configPath: 'tailwind.config.js',
-    exposeConfig: true
-  },
-
-  //@ts-ignore
-  i18n: {
-    locales: [
-      {
-        code: 'fr',
-        file: 'fr.json'
-      },
-      {
-        code: 'en',
-        file: 'en.json'
-      }
-    ],
-    lazy: true,
-    langDir: 'locales',
-    defaultLocale: 'fr',
-    strategy: 'prefix_except_default',
-    detectBrowserLanguage: false
   },
 
   app: {
@@ -34,30 +23,29 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      title: 'Celte - Server Meshing for Multiplayer Games',
+      title: 'Celte — Dynamic Server Meshing',
       link: [
-        { rel: 'icon', type: 'image/webp', href: '/celte-logo-white.png' },
-        { rel: 'apple-touch-icon', href: '/celte-logo-white.png' }
+        { rel: 'icon', type: 'image/png', href: '/celte-logo-white.png' },
       ],
       meta: [
-        { name: 'description', content: 'Celte enables 10,000+ concurrent players on unlimited maps with 40% lower server costs through advanced server meshing technology.' }
-      ]
-    }
-  },
-
-  experimental: {
-    payloadExtraction: false
+        {
+          name: 'description',
+          content:
+            'Celte enables seamless multiplayer at any scale with dynamic server meshing. Built in Rust, available for Unity, C#, and any language via FFI.',
+        },
+      ],
+    },
   },
 
   ssr: false,
 
   nitro: {
-    preset: 'github-pages'
+    preset: 'github-pages',
   },
 
   typescript: {
-    strict: true
+    strict: true,
   },
 
-  compatibilityDate: '2024-04-03'
-});
+  compatibilityDate: '2024-04-03',
+})
