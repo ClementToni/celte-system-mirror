@@ -235,7 +235,7 @@
     </section>
 
     <!-- ─── Stack ────────────────────────────────────────────── -->
-    <section class="stack-section">
+    <!-- <section class="stack-section">
       <div class="container">
         <div class="eyebrow">Technical stack</div>
         <h2 class="stack-h2">Built in Rust. Available everywhere.</h2>
@@ -247,7 +247,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- ─── CTA ───────────────────────────────────────────────── -->
     <section class="tech-cta">
@@ -255,15 +255,15 @@
         <h2 class="tech-cta-h2">Integrate in days, not months.</h2>
         <p class="tech-cta-sub">
           Celte ships natively with a Unity SDK.
-          Integration takes a weekend.
+          <!-- Integration takes a weekend. -->
         </p>
         <!-- <div class="cta-actions">
-          <NuxtLink to="/contact" class="btn-primary">Get early access →</NuxtLink>
+          <NuxtLink to="/contact" class="btn-primary">Contact Us →</NuxtLink>
           <a href="https://docs.celte.dev" target="_blank" rel="noopener" class="btn-ghost">
             Read the docs
           </a>
         </div> -->
-        <NuxtLink to="/contact" class="btn-primary">Get early access →</NuxtLink>
+        <NuxtLink to="/contact" class="btn-primary">Contact Us →</NuxtLink>
       </div>
     </section>
 
@@ -448,7 +448,7 @@ const stack = [
 }
 
 .anim-stat-val {
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 300;
   letter-spacing: -0.04em;
   color: var(--text);

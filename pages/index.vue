@@ -20,7 +20,7 @@
           <!-- Built in Rust. Available for Unity, C# and any language via FFI. -->
         </p>
         <!-- <div class="hero-actions">
-          <NuxtLink to="/contact" class="btn-primary">Get early access →</NuxtLink>
+          <NuxtLink to="/contact" class="btn-primary">Contact Us →</NuxtLink>
           <a href="https://docs.celte.dev" target="_blank" rel="noopener" class="btn-ghost">
             Read the docs
           </a>
@@ -146,7 +146,7 @@
           generation of multiplayer?
         </h2>
         <div class="cta-actions">
-          <NuxtLink to="/contact" class="btn-primary">Get early access →</NuxtLink>
+          <NuxtLink to="/contact" class="btn-primary">Contact Us →</NuxtLink>
           <NuxtLink to="/technology" class="btn-ghost">See how it works</NuxtLink>
         </div>
       </div>

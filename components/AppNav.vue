@@ -2,14 +2,15 @@
   <header class="nav" :class="{ scrolled }">
     <div class="inner">
       <NuxtLink to="/" class="logo">
-        <span class="mark" />
+        <!-- <span class="mark" /> -->
+        <img src="/celte-logo-white.png" alt="Celte logo" class="h-10 logo-light" />
         <span class="wordmark">CELTE</span>
       </NuxtLink>
       <nav class="links">
         <a href="/#product" class="link">Product</a>
         <NuxtLink to="/technology" class="link">Technology</NuxtLink>
         <a href="https://docs.celte.dev" target="_blank" rel="noopener" class="link">Docs</a>
-        <NuxtLink to="/contact" class="cta">Contact us →</NuxtLink>
+        <NuxtLink to="/contact" class="cta">Contact Us →</NuxtLink>
       </nav>
     </div>
   </header>

@@ -2,16 +2,20 @@
   <footer class="footer">
     <div class="inner">
       <div class="brand">
-        <span class="mark" />
+        <!-- <span class="mark" /> -->
+        <img src="/celte-logo-white.png" alt="Celte logo" class="h-10 logo-light" />
         <span class="wordmark">CELTE</span>
       </div>
-      <p class="tagline">Dynamic server meshing for every game studio.</p>
+      <!-- <p class="tagline">Dynamic server meshing for every game studio.</p> -->
+       <p class="tagline">Breaking the limit that technique imposes on creativity.
+       </p>
       <nav class="links">
         <NuxtLink to="/technology">Technology</NuxtLink>
         <NuxtLink to="/contact">Contact</NuxtLink>
-        <a href="https://docs.celte.dev" target="_blank" rel="noopener">Docs</a>
+        <!-- <a href="https://docs.celte.dev" target="_blank" rel="noopener">Docs</a> -->
       </nav>
-      <p class="copy">© 2026 Celte. Built in Rust.</p>
+      <!-- <p class="copy">© 2026 Celte.</p> Dynamic date with year -->
+       <p class="copy">© {{ new Date().getFullYear() }} Celte.</p>
     </div>
   </footer>
 </template>

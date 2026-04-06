@@ -14,7 +14,7 @@
 interface Server {
   id: number
   label: string
-  x: number; y: number; w: number; h: number   // animated current
+  x: number; y: number; w: number; h: number   // animated current (logical)
   tx: number; ty: number; tw: number; th: number // lerp targets
   alpha: number; targetAlpha: number
   colorIdx: number
@@ -37,6 +37,8 @@ interface AuthEvent {
   x: number; y: number
   alpha: number
 }
+
+const VELOCITY_SCALE = 0.0022
 
 // ── Server colour palette ────────────────────────────────────────
 const PALETTE = [
@@ -99,15 +101,37 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 let animFrame = 0
 let startTime = 0
 let phase = 0
-let lastLifecycleTime = 0
+let direction: 1 | -1 = 1   // +1 = scaling up, -1 = scaling down
+let lastPhaseTime = 0
 let lastSpawnTime = 0
-let lastDespawnTime = 0
-let resetting = false
-let resetAt = 0  // timestamp when reset was scheduled
+
+// Target active-player count for each phase (scales with server count)
+const PHASE_PLAYER_TARGETS = [5, 7, 9, 11]
+// How long each phase stays before advancing (ms)
+const PHASE_DURATION = 6500
 
 const servers: Server[] = []
 const players: Player[] = []
 const authEvents: AuthEvent[] = []
+
+// ── Boundary wobble ──────────────────────────────────────────────
+// Each internal boundary (shared edge between two servers) gets a unique
+// phase offset so adjacent servers always move by the exact same amount.
+const boundaryOffsets = new Map<string, number>()
+
+function boundaryWobble(t: number, axis: 'x' | 'y', targetPos: number): number {
+  // Key on the target (layout) position so both servers sharing this edge
+  // always look up the identical wobble value regardless of lerp drift.
+  const key = `${axis}:${Math.round(targetPos * 1000)}`
+  if (!boundaryOffsets.has(key)) {
+    boundaryOffsets.set(key, boundaryOffsets.size * 1.618)  // golden-ratio spread
+  }
+  return Math.sin(t * 0.00055 + boundaryOffsets.get(key)!) * 5  // ±5 px
+}
+
+// Canvas-edge threshold: normalized positions within this distance from 0 or 1
+// are treated as outer edges and are NOT wobbled.
+const OUTER_EDGE = 0.012
 
 function buildServers(layoutIdx: number) {
   const layout = LAYOUTS[layoutIdx]
@@ -157,11 +181,20 @@ function spawnPlayer(t: number) {
   p.serverId = sv ? sv.id : -1
 }
 
-function goToPhase(newPhase: number, t: number) {
-  phase = newPhase
+function advancePhase(t: number) {
+  const next = phase + direction
+  // Bounce direction at extremes
+  if (next >= LAYOUTS.length) {
+    direction = -1
+    phase = LAYOUTS.length - 2
+  } else if (next < 0) {
+    direction = 1
+    phase = 1
+  } else {
+    phase = next
+  }
   buildServers(phase)
-  lastLifecycleTime = t
-  if (newPhase > 0) spawnPlayer(t)
+  lastPhaseTime = t
 }
 
 function despawnOnePlayer() {
@@ -170,65 +203,24 @@ function despawnOnePlayer() {
   active[Math.floor(Math.random() * active.length)].targetAlpha = 0
 }
 
-function resetAnimation(t: number) {
-  resetting = false
-  resetAt = 0
-  phase = 0
-  startTime = t
-  lastLifecycleTime = t
-  lastSpawnTime = t
-  lastDespawnTime = t
-  // Fade all servers out, then bring phase-0 back
-  servers.forEach((s) => { s.targetAlpha = 0 })
-  buildServers(0)
-  // Despawn all players cleanly, then spawn 3 fresh ones
-  players.forEach((p) => { p.targetAlpha = 0; p.alpha = 0; p.trail = [] })
-  players.slice(0, 3).forEach((p) => {
-    p.x = 0.1 + Math.random() * 0.8
-    p.y = 0.1 + Math.random() * 0.8
-    p.vx = (Math.random() - 0.5) * 0.0022
-    p.vy = (Math.random() - 0.5) * 0.0022
-    p.spawnRing = 1
-    p.targetAlpha = 1
-    p.colorIdx = 0; p.prevColorIdx = 0; p.colorT = 1
-  })
-}
-
 // ── Draw ─────────────────────────────────────────────────────────
 function draw(ctx: CanvasRenderingContext2D, W: number, H: number, t: number) {
   if (startTime === 0) {
     startTime = t
+    lastPhaseTime = t
     buildServers(0)
   }
 
-  const elapsed = t - startTime
+  // ── Ping-pong phase loop: 0→1→2→3→2→1→0→1→... ─────────────────
+  if (t - lastPhaseTime > PHASE_DURATION) advancePhase(t)
 
+  // ── Player count tracks current phase target ───────────────────
   const activeCount = players.filter((p) => p.targetAlpha === 1).length
-
-  if (!resetting) {
-    // Phase progression
-    if (phase === 0 && elapsed > 5000) goToPhase(1, t)
-    if (phase === 1 && elapsed > 11000) goToPhase(2, t)
-    if (phase === 2 && elapsed > 17000) goToPhase(3, t)
-    // Phase 4 cycles once, then triggers reset sequence
-    if (phase === 3 && t - lastLifecycleTime > 7000) goToPhase(4, t)
-    if (phase === 4 && t - lastLifecycleTime > 6000) {
-      goToPhase(3, t)
-      resetting = true      // start wind-down after returning to phase 3
-      lastDespawnTime = t
-    }
-
-    // Spawn players gradually during normal operation
-    if (t - lastSpawnTime > 2500 && activeCount < 10) spawnPlayer(t)
-  } else {
-    // Wind-down: despawn all players one by one every 1.2s
-    if (activeCount > 0 && t - lastDespawnTime > 1200) {
-      despawnOnePlayer()
-      lastDespawnTime = t
-    }
-    // Schedule reset 2s after last despawn (enough for final player to fade out)
-    if (activeCount === 0 && resetAt === 0) resetAt = t
-    if (resetAt > 0 && t - resetAt > 2000) resetAnimation(t)
+  const target = PHASE_PLAYER_TARGETS[phase]
+  if (activeCount < target && t - lastSpawnTime > 1800) spawnPlayer(t)
+  if (activeCount > target && t - lastSpawnTime > 1000) {
+    despawnOnePlayer()
+    lastSpawnTime = t
   }
 
   ctx.clearRect(0, 0, W, H)
@@ -262,31 +254,57 @@ function draw(ctx: CanvasRenderingContext2D, W: number, H: number, t: number) {
     }
 
     const pal = PALETTE[s.colorIdx % PALETTE.length]
-    const sx = s.x * W, sy = s.y * H, sw = s.w * W, sh = s.h * H
+
+    // ── Boundary-consistent wobble ────────────────────────────────
+    // Each internal edge is displaced by the same amount on both sides,
+    // so adjacent boxes always touch with zero gap or overlap.
+    let drawX = s.x * W, drawY = s.y * H
+    let drawW = s.w * W, drawH = s.h * H
+
+    // Left edge — internal boundary: shift the whole box right/left
+    if (s.tx > OUTER_EDGE) {
+      const d = boundaryWobble(t, 'x', s.tx)
+      drawX += d; drawW -= d          // move left edge, keep right fixed
+    }
+    // Right edge — internal boundary: stretch/shrink right side
+    if (s.tx + s.tw < 1 - OUTER_EDGE) {
+      drawW += boundaryWobble(t, 'x', s.tx + s.tw)
+    }
+    // Top edge — internal boundary
+    if (s.ty > OUTER_EDGE) {
+      const d = boundaryWobble(t, 'y', s.ty)
+      drawY += d; drawH -= d
+    }
+    // Bottom edge — internal boundary
+    if (s.ty + s.th < 1 - OUTER_EDGE) {
+      drawH += boundaryWobble(t, 'y', s.ty + s.th)
+    }
+
+    // Load for bar display
+    const load = players.filter((p) => p.alpha > 0.5 && p.serverId === s.id).length
+    const maxLoad = 4
 
     // Zone fill
     ctx.save()
     ctx.globalAlpha = s.alpha
     ctx.fillStyle = pal.fill
-    ctx.fillRect(sx, sy, sw, sh)
+    ctx.fillRect(drawX, drawY, drawW, drawH)
 
     // Zone border
     ctx.strokeStyle = pal.border
     ctx.lineWidth = 1.5
-    ctx.strokeRect(sx + 0.75, sy + 0.75, sw - 1.5, sh - 1.5)
+    ctx.strokeRect(drawX + 0.75, drawY + 0.75, drawW - 1.5, drawH - 1.5)
 
-    // Server label (top-left corner, matching border color)
+    // Server label
     ctx.fillStyle = pal.border
     ctx.font = '500 11px Onest, monospace'
     ctx.textAlign = 'left'
-    ctx.fillText(s.label, sx + 8, sy + 16)
+    ctx.fillText(s.label, drawX + 8, drawY + 16)
 
-    // Load bar (bottom of zone)
-    const load = players.filter((p) => p.alpha > 0.5 && p.serverId === s.id).length
-    const maxLoad = 4
-    const barW = Math.min(sw * 0.6, 80)
-    const bx = sx + sw - barW - 8
-    const by = sy + sh - 8
+    // Load bar
+    const barW = Math.min(drawW * 0.6, 80)
+    const bx = drawX + drawW - barW - 8
+    const by = drawY + drawH - 8
     ctx.fillStyle = 'rgba(255,255,255,0.08)'
     ctx.fillRect(bx, by - 3, barW, 3)
     ctx.fillStyle = pal.border
@@ -367,13 +385,13 @@ function draw(ctx: CanvasRenderingContext2D, W: number, H: number, t: number) {
     if (p.x < 0.01 || p.x > 0.99) { p.vx *= -1; p.x = Math.max(0.01, Math.min(0.99, p.x)) }
     if (p.y < 0.01 || p.y > 0.99) { p.vy *= -1; p.y = Math.max(0.01, Math.min(0.99, p.y)) }
 
-    if (Math.random() < 0.006) {
-      p.vx += (Math.random() - 0.5) * 0.0012
-      p.vy += (Math.random() - 0.5) * 0.0012
-      const spd = Math.sqrt(p.vx ** 2 + p.vy ** 2)
-      const max = 0.003
-      if (spd > max) { p.vx = (p.vx / spd) * max; p.vy = (p.vy / spd) * max }
-    }
+    // if (Math.random() < 0.006) {
+    //   p.vx += (Math.random() - 0.5) * 0.0012
+    //   p.vy += (Math.random() - 0.5) * 0.0012
+    //   const spd = Math.sqrt(p.vx ** 2 + p.vy ** 2)
+    //   const max = 0.003
+    //   if (spd > max) { p.vx = (p.vx / spd) * max; p.vy = (p.vy / spd) * max }
+    // }
 
     // Authority transfer detection
     const sv = getServerForPlayer(p.x, p.y)
@@ -419,7 +437,7 @@ onMounted(() => {
   for (let i = 0; i < 12; i++) {
     players.push({
       id: i, x: Math.random(), y: Math.random(),
-      vx: (Math.random() - 0.5) * 0.002, vy: (Math.random() - 0.5) * 0.002,
+      vx: (Math.random() - 0.5) * VELOCITY_SCALE, vy: (Math.random() - 0.5) * VELOCITY_SCALE,
       serverId: -1, colorIdx: 0, prevColorIdx: 0, colorT: 1,
       alpha: 0, targetAlpha: 0, spawnRing: 0, trail: [],
     })
@@ -427,7 +445,7 @@ onMounted(() => {
 
   // Spawn initial 3 players after a short delay
   setTimeout(() => {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < PHASE_PLAYER_TARGETS[phase]; i++) {
       players[i].x = 0.1 + Math.random() * 0.8
       players[i].y = 0.1 + Math.random() * 0.8
       players[i].targetAlpha = 1
