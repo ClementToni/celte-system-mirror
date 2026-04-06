@@ -2,7 +2,6 @@
   <header class="nav" :class="{ scrolled }">
     <div class="inner">
       <NuxtLink to="/" class="logo">
-        <!-- <span class="mark" /> -->
         <img src="/celte-logo-white.png" alt="Celte logo" class="h-10 logo-light" />
         <span class="wordmark">CELTE</span>
       </NuxtLink>

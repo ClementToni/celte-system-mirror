@@ -5,6 +5,7 @@
     <!-- ─── Hero ─────────────────────────────────────────────── -->
     <section class="hero">
       <div class="hero-bg">
+        <GlobeBackground />
         <div class="hero-glow" />
         <div class="hero-grid" />
       </div>
