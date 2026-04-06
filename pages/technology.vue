@@ -62,13 +62,11 @@
                   server. When a player moves from one server's zone to another, there must be a
                   handoff, but most engines implement this as a full loading screen or a hard
                   disconnect.
-                  ELIOT ne me tape pas stp
                 </p>
                 <p>
-                  Celte's authority transfer protocol operates at the network
-                  level, below the game engine. The owning server writes a snapshot of the entity
-                  state, the receiving server ingests it, and the handoff completes within a single
-                  tick, typically under 1ms. The player notices nothing.
+                  Celte's system decouples data from any singular server so authority transfer operates at the network level.
+                  Changing authority does not load any new data and can happen instantly. Players don't notice they are changing servers.
+                  Even better, interactions across server boundary become not only possible, but totally seamless.
                 </p>
                 <ul class="concept-props">
                   <li>
@@ -127,7 +125,8 @@
                   Celte continuously evaluates entity density and compute load per zone. When a
                   zone becomes too dense, it splits and automatically redistributes entities across
                   two smaller, lighter servers. When zones thin out, they merge. The game world
-                  remains seamless; the backend topology changes without player awareness.
+                  remains seamless and the backend topology changes without player awareness.
+                  Manual control remains possible for even more agressive optimizations.
                 </p>
                 <ul class="concept-props">
                   <li>
@@ -364,7 +363,7 @@ const stack = [
   },
   {
     layer: 'Transport',
-    tech: 'QUIC / UDP',
+    tech: 'TCP / UDP',
     note: 'Low-latency, multiplexed, connection-resilient',
   },
   {

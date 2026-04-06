@@ -16,7 +16,7 @@
           for every game studio.
         </h1>
         <p class="hero-sub">
-          The GDK that makes infinite player worlds possible.
+          The GDK that makes worlds with infinite player count a reality.
           <!-- <br /> -->
           <!-- Built in Rust. Available for Unity, C# and any language via FFI. -->
         </p>
@@ -42,7 +42,7 @@
     <section class="statement">
       <div class="container">
         <p class="statement-text">
-          <span class="t-muted">We make impossible</span><br />
+          <span class="t-muted">We make impossibly</span><br />
           <span class="t-accent">massive games a reality.</span>
         </p>
         <div class="statement-rule" />
@@ -170,7 +170,7 @@ const stats = [
 ]
 
 const LEFT_TEXT =
-  'We dynamically allocate resources in real time, without loading time.'
+  'We dynamically allocate resources in seamlessly without loading time.'
 const RIGHT_TEXT =
   'We scale your servers up and down automatically. You only pay for what your players use.'
 
@@ -183,7 +183,7 @@ const serverBars = graphBars.map((h) => Math.round(h * 0.85 + Math.random() * 8)
 const features = [
   {
     title: 'Authority Transfer',
-    desc: 'Players cross server zones with zero interruption. Authority hands off in microseconds via a Rust-native protocol, invisible to the player.',
+    desc: 'Players cross server boundaries with zero interruption. Authority hands off in microseconds via a Rust-native protocol so players don\'t notice it.',
   },
   {
     title: 'Load Balancing',
@@ -191,11 +191,11 @@ const features = [
   },
   {
     title: 'Dynamic Scaling',
-    desc: 'Server instances spin up and down with your CCU curve. Peak loads are absorbed in real time. Idle capacity is reclaimed immediately.',
+    desc: 'Server instances spin up and down with your CCU. Peak loads are absorbed in real time. Idle capacity is reclaimed immediately.',
   },
   {
     title: 'Any Language',
-    desc: 'The Celte core is pure Rust. A native C# SDK targets Unity directly. Every other language is supported through a stable, battle-tested FFI layer.',
+    desc: 'The Celte core is pure Rust. A native C# SDK targets Unity directly. Every other language is supported through a stable FFI layer.',
   },
 ]
 

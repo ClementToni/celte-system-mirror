@@ -26,7 +26,7 @@
               </div>
               <div class="detail">
                 <span class="detail-label">Early access</span>
-                <span class="detail-val">Open now</span>
+                <span class="detail-val status-coming-soon">Coming soon</span>
               </div>
             </div> -->
           </div>
@@ -289,6 +289,12 @@ function reset() {
   font-size: 13px;
   color: var(--text);
   font-weight: 400;
+}
+
+.detail-val.status-coming-soon {
+  color: var(--accent);
+  font-weight: 500;
+  text-transform: none;
 }
 
 /* ── Form ─────────────────────────────────────────────────────── */
